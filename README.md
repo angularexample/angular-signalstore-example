@@ -1,8 +1,12 @@
-# AngularSignalstoreExample
+# angular-signalstore-example
+
+Angular SignalStore Example
+
+Example of using SignalStore with Angular.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.2.
 
-## Development server
+## To Run This App
 
 To start a local development server, run:
 
@@ -10,50 +14,89 @@ To start a local development server, run:
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Compare Three Ways to Manage State in Angular
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+I have written tree versions of this same example application. This makes it easy to compare the differences between the three versions.
 
-```bash
-ng generate component component-name
-```
+- [Angular NgRx Example](https://github.com/angularexample/angular-ngrx-example)
+- [Angular Pure Signals Example](https://github.com/angularexample/angular-pure-signals-example)
+- [Angular SignalStore Example](https://github.com/angularexample/angular-signalstore-example)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+All three versions of this example application have identical user experience.
 
-```bash
-ng generate --help
-```
+All three versions use the Facade pattern, which helps to decouple the view from the state management logic.
 
-## Building
+You will see that the view components are small, and almost the same in all three versions.
 
-To build the project run:
+The only difference is the state management code.
 
-```bash
-ng build
-```
+### The SignalStore Version is the Smallest
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+When you compare the SignalStore version to the other versions, you will see that the SignalStore version is the smallest.
 
-## Running unit tests
+It has the least amount of code.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+It is probably the easiest to understand.
 
-```bash
-ng test
-```
+## Table of Contents
 
-## Running end-to-end tests
+- [About SignalStore](#about-signalstore)
+  - [What is State Management?](#what-is-state-management)
+    - [Smaller Components](#smaller-components) 
+  - [What are Angular Signals?](#what-are-angular-signals)
+    - [Why is Angular Now Using Signals?](#why-is-angular-now-using-signals)
+  - [What is Angular SignalStore?](#what-is-angular-signalstore)
+  - 
 
-For end-to-end (e2e) testing, run:
+## About SignalStore
 
-```bash
-ng e2e
-```
+SignalStore is a library from the makers of NgRx that uses Angular Signals for state management.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### What is State Management?
 
-## Additional Resources
+State management, in simple terms, is a way to store application data and logic in a centralized service.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The goal of state management is to make your view components much smaller, more reusable, and easier to develop and test. 
+
+#### Smaller Components
+
+Without state management, a typical component does everything from fetching data to displaying it to the user.
+It will usually have a lot of logic and a lot of code to get and manipulate data.
+
+When you use state management, you can separate the view from everything else.
+You take the data access, the logic, and the state, and put all of that somewhere else.
+
+You are left with a view component that only has to display the data.
+
+View components are much smaller, easier to test, and easier to reuse.
+
+### What are Angular Signals?
+
+Angular Signals is a newer technology introduced with Angular 17.
+
+A signal is data that will be sent to a component. It is similar to a Promise or Observable.
+
+For more information, see the [Angular Signals documentation](https://angular.dev/guide/signals).
+
+#### Why is Angular Now Using Signals?
+
+You will see that Angular is now using Signals as a big part of all of its new releases.
+
+One reason is that Signals help to increase performance.
+
+Signals can make your application more responsive.
+The view component will only update smaller portions when the data it needs has changed.
+
+### What is Angular SignalStore?
+
+Angular SignalStore is a library that uses Angular Signals to manage state.
+
+It is a package developed by the makers of NgRx.
+
+All the state management logic and data are contained in the SignalStore class.
+
+For more information, see the [NgRx SignalStore documentation](https://ngrx.io/guide/signals/signal-store).
+
+
