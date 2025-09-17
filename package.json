@@ -1,6 +1,12 @@
 {
   "name": "angular-signalstore-example",
-  "version": "0.0.0",
+  "version": "1.0.1",
+  "description": "Angular SignalStore Example. Angular 20.2.2, @ngrx/signals 20.0.1",
+  "author": {
+    "name": "JC Lango",
+    "email": "info@angularexample.com"
+  },
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -22,12 +28,15 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cdk": "^20.2.2",
     "@angular/common": "^20.2.0",
     "@angular/compiler": "^20.2.0",
     "@angular/core": "^20.2.0",
     "@angular/forms": "^20.2.0",
+    "@angular/material": "^20.2.2",
     "@angular/platform-browser": "^20.2.0",
     "@angular/router": "^20.2.0",
+    "@ngrx/signals": "^20.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
