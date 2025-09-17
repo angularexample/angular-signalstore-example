@@ -4,7 +4,23 @@ Angular SignalStore Example
 
 Example of using SignalStore with Angular.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.2.
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [To Run This App](#to-run-this-app)
+- [If You Want to Use the Code](#if-you-want-to-use-the-code)
+  - [Click the Star Button and Follow the Author](#click-the-star-button-and-follow-the-author)
+- [Date Published](#date-published)
+- [Versions Used](#versions-used)
+- [About The Author](#about-the-author)
+- [Compare Three Ways to Manage State in Angular](#compare-three-ways-to-manage-state-in-angular)
+  - [The SignalStore Version is the Smallest](#the-signalstore-version-is-the-smallest)
+- [About SignalStore](#about-signalstore)
+  - [What is State Management?](#what-is-state-management)
+    - [Smaller Components](#smaller-components)
+  - [What are Angular Signals?](#what-are-angular-signals)
+    - [Why is Angular Now Using Signals?](#why-is-angular-now-using-signals)
+  - [What is Angular SignalStore?](#what-is-angular-signalstore)
 
 ## To Run This App
 
@@ -16,12 +32,56 @@ ng serve
 
 Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+## If You Want to Use the Code
+
+You can clone the repo and use the code as you see fit. Or you can follow the instructions in this article to create your own project.
+
+In return, Please:
+
+### Click the Star Button and Follow the Author
+
+* Go to the Repository https://github.com/angularexample/mfe-angular-react-nx and click the **Star** button at the top right.
+* Go to my GitHub page https://github.com/angularexample and click the **Follow** button on the left side.
+
+This will promote the repo and help others to find this solution.
+
+## Date Published
+
+September 17, 2025
+
+## Versions Used
+
+At the time of this writing, we used the latest version of Angular and NgRX Signals.
+
+* Angular 20.2.2
+* @ngrx/signals 20.0.1
+
+This application uses:
+
+* The new folder structure and file name conventions for Angular 20.
+* Zoneless change detection.
+* Standalone Components.
+
+## About The Author
+
+`JC Lango` is a UI Architect and Developer for many large-scale web applications at several well-known Fortune 500 companies.
+
+He is an expert in **Angular** and **React** and maintains these sites at GitHub:
+
+* **AngularExample** [https://github.com/angularexample](https://github.com/angularexample)
+* **ReactJSExample** [https://github.com/reactjsexample](https://github.com/reactjsexample)
+
+JC may be available to work remotely and can be contacted at these links:
+
+* LinkedIn: [https://linkedin.com/in/jclango](https://linkedin.com/in/jclango)
+* Email: [jobs@jclango.com](mailto:jobs@jclango.com)
+
 ## Compare Three Ways to Manage State in Angular
 
-I have written tree versions of this same example application. This makes it easy to compare the differences between the three versions.
+I have written three versions of this same example application. This makes it easy to compare the differences between the three versions.
 
-- [Angular NgRx Example](https://github.com/angularexample/angular-ngrx-example)
-- [Angular Pure Signals Example](https://github.com/angularexample/angular-pure-signals-example)
+- [Angular NgRx Example](https://github.com/angularexample/angular18-ngrx-standalone)
+- [Angular Pure Signals Example](https://github.com/angularexample/angular20-signal-state)
 - [Angular SignalStore Example](https://github.com/angularexample/angular-signalstore-example)
 
 All three versions of this example application have identical user experience.
@@ -39,16 +99,6 @@ When you compare the SignalStore version to the other versions, you will see tha
 It has the least amount of code.
 
 It is probably the easiest to understand.
-
-## Table of Contents
-
-- [About SignalStore](#about-signalstore)
-  - [What is State Management?](#what-is-state-management)
-    - [Smaller Components](#smaller-components) 
-  - [What are Angular Signals?](#what-are-angular-signals)
-    - [Why is Angular Now Using Signals?](#why-is-angular-now-using-signals)
-  - [What is Angular SignalStore?](#what-is-angular-signalstore)
-  - 
 
 ## About SignalStore
 
