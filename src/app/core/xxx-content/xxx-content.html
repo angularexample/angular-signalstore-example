@@ -1,0 +1,6 @@
+@if (isContentLoading()) {
+  <p>CONTENT LOADING...</p>
+}
+@else if (isContentEmpty()) {
+  <p>CONTENT EMPTY: {{ contentKey }}</p>
+}
