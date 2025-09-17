@@ -133,6 +133,7 @@ export const XxxPostStore = signalStore(
               alertService.showInfo('Successfully updated post:  ' + post.id);
               void router.navigateByUrl('/post')
             }
+            loadingService.loadingOff();
           })
         }
       }
