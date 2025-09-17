@@ -1,0 +1,8 @@
+{
+  "contentModel": {
+    "headerTitle": "Angular NgRx Signal Store Example",
+    "pageTitle": "Posts",
+    "bodyText": "Select a post to view or edit."
+  },
+  "key": "post"
+}
