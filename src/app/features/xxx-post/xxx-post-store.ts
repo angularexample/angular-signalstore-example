@@ -154,7 +154,7 @@ export const XxxPostStore = signalStore(
         if (userSelectedUserId !== undefined) {
           const postSelectedUserId: number | undefined = store.selectedUserId ? store.selectedUserId() : undefined;
           if (!postSelectedUserId || (postSelectedUserId && postSelectedUserId !== userSelectedUserId)) {
-            patchState(store, {selectedUserId: userSelectedUserId});
+            patchState(store, {...xxxPostInitialState, selectedUserId: userSelectedUserId});
           }
           if (!store.isPostsLoaded()) {
             store.loadPosts();
