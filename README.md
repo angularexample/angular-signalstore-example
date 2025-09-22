@@ -161,12 +161,82 @@ Remove the Karma and Jasmine packages from the package.json file.
 Add the Jest packages to the package.json file.
 
 ```
-    npm install --save-dev jest @types/jest
-```
-
-```
-    npm install --save-dev jest-preset-angular
+    npm install --save-dev jest @types/jest jest-preset-angular
 ```
 
 ### Add Jest Configuration
+
+#### Create jest.config.js File
+
+Create a jest.config.js file in the root of the project.
+
+```javascript
+module.exports = {
+    preset: 'jest-preset-angular',
+    setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
+    testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
+    transform: {
+        '^.+\\.ts$': 'ts-jest', // Only transform .ts files
+    },
+    transformIgnorePatterns: [
+        '/node_modules/(?!flat)/', // Exclude modules except 'flat' from transformation
+    ],
+};
+```
+
+#### Create setup-jest.ts File
+
+Create a setup-jest.ts file in the root of the project.
+
+```typescript
+import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
+setupZoneTestEnv();
+```
+
+#### Update test Section in angular.json
+
+Update the test section in the angular.json file.
+
+```
+"test": {
+  "builder": "@angular-devkit/build-angular:jest",
+  "options": {
+    "tsConfig": "tsconfig.spec.json"
+  }
+}
+```
+
+#### Add esModuleInterop to tsconfig.json
+
+Add the following to the `tsconfig.json` file under the `compilerOptions` section.
+
+```
+"esModuleInterop": true,
+```
+
+#### Update tsconfig.spec.json
+
+In the `tsconfig.spec.json` file, add the following to the `compilerOptions` section.
+
+```
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/spec",
+    "types": ["jest", "node"]
+  },
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.d.ts"
+  ]
+}
+```
+
+#### Update scripts in package.json
+
+In the `scripts` section of the `package.json` file, change the `test` property to `jest`.
+
+```
+    "test": "jest"
+```
 
