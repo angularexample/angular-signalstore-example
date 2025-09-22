@@ -150,3 +150,23 @@ All the state management logic and data are contained in the SignalStore class.
 For more information, see the [NgRx SignalStore documentation](https://ngrx.io/guide/signals/signal-store).
 
 
+## Replace Jasmin with Jest
+
+### Remove Karma and Jasmine
+
+Remove the Karma and Jasmine packages from the package.json file.
+
+### Add Jest
+
+Add the Jest packages to the package.json file.
+
+```
+    npm install --save-dev jest @types/jest
+```
+
+```
+    npm install --save-dev jest-preset-angular
+```
+
+### Add Jest Configuration
+
