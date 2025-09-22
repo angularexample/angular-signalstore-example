@@ -161,7 +161,7 @@ Remove the Karma and Jasmine packages from the package.json file.
 Add the Jest packages to the package.json file.
 
 ```
-    npm install --save-dev jest @types/jest jest-preset-angular
+    npm install --save-dev jest @types/jest jest-preset-angular jest-environment-jsdom
 ```
 
 ### Add Jest Configuration
@@ -190,6 +190,7 @@ Create a setup-jest.ts file in the root of the project.
 
 ```typescript
 import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
+
 setupZoneTestEnv();
 ```
 
