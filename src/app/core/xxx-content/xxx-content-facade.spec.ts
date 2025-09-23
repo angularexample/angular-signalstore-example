@@ -21,40 +21,40 @@ describe('XxxContentFacade', () => {
 
   service = TestBed.inject(XxxContentFacade);
   describe('constructor phase', () => {
-    it('should be created', async () => {
+    it('should be created', () => {
       expect(service).toBeDefined();
     });
 
-    it('should have contentByKey', async () => {
+    it('should have contentByKey', () => {
       expect(service.contentByKey).toBeDefined();
     });
 
-    it('should have isContentEmpty', async () => {
+    it('should have isContentEmpty', () => {
       expect(service.isContentEmpty).toBeDefined();
     });
 
-    it('should have isContentLoading', async () => {
+    it('should have isContentLoading', () => {
       expect(service.isContentLoading).toBeDefined();
     });
   })
 
   describe('methods', () => {
-    it('should run contentStore.contentByKey()', async () => {
+    it('should run contentStore.contentByKey()', () => {
       service.contentByKey(contentKey);
       expect(mockXxxContentStore.contentByKey).toHaveBeenCalledWith(contentKey);
     });
 
-    it('should run contentStore.isContentEmpty()', async () => {
+    it('should run contentStore.isContentEmpty()', () => {
       service.isContentEmpty(contentKey);
       expect(mockXxxContentStore.isContentEmpty).toHaveBeenCalledWith(contentKey);
     });
 
-    it('should run contentStore.isContentLoading()', async () => {
+    it('should run contentStore.isContentLoading()', () => {
       service.isContentLoading(contentKey);
       expect(mockXxxContentStore.isContentLoading).toHaveBeenCalledWith(contentKey);
     });
 
-    it('should run contentStore.showContent()', async () => {
+    it('should run contentStore.showContent()', () => {
       service.showContent(contentKey);
       expect(mockXxxContentStore.showContent).toHaveBeenCalledWith(contentKey);
     });
