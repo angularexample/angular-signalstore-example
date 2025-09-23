@@ -2,13 +2,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TestBed } from '@angular/core/testing';
 import { XxxAlert } from './xxx-alert';
 
-let service: XxxAlert;
-
 describe('XxxAlert', () => {
   const expectedMessage: string = 'Expected message';
   const mockMatSnackBar = {
     open: jest.fn(),
   };
+  let service: XxxAlert;
 
   TestBed.configureTestingModule({
     providers: [
