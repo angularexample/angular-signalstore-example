@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, InputSignal, OnInit, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, InputSignal, OnInit, signal, Signal } from '@angular/core';
 import { XxxContentFacade } from './xxx-content-facade';
 
 @Component({
@@ -9,10 +9,12 @@ import { XxxContentFacade } from './xxx-content-facade';
 export class XxxContent implements OnInit {
   contentKey:InputSignal<string> = input<string>('');
   private contentFacade: XxxContentFacade = inject(XxxContentFacade);
-  protected readonly isContentEmpty: Signal<boolean> = this.contentFacade.isContentEmpty(this.contentKey());
-  protected readonly isContentLoading: Signal<boolean> = this.contentFacade.isContentLoading(this.contentKey());
+  protected isContentEmpty: Signal<boolean> = signal(false);
+  protected isContentLoading: Signal<boolean> = signal(false);
 
   ngOnInit(): void {
     this.contentFacade.showContent(this.contentKey());
+    this.isContentEmpty = this.contentFacade.isContentEmpty(this.contentKey());
+    this.isContentLoading = this.contentFacade.isContentLoading(this.contentKey());
   }
 }
