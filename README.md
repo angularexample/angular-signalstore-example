@@ -188,6 +188,14 @@ module.exports = {
 
 Create a setup-jest.ts file in the root of the project.
 
+If not using Zone.js, add the following to the setup-jest.ts file.
+```javascript
+import { setupZonelessTestEnv } from 'jest-preset-angular/setup-env/zoneless';
+
+setupZonelessTestEnv();
+```
+
+If using Zone.js, add the following to the setup-jest.ts file.
 ```typescript
 import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
 
