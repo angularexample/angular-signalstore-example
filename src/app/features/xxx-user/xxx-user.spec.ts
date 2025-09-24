@@ -1,12 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { mockUser, mockUsers } from './xxx-user.mocks';
-import { signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { XxxContentFacade } from '../../core/xxx-content/xxx-content-facade';
 import { XxxUser } from './xxx-user';
 import { XxxUserFacade } from './xxx-user-facade';
 import { XxxUserType } from './xxx-user-types';
+import { XxxContent } from '../../core/xxx-content/xxx-content';
 
 // Use extended class to test protected method.
+@Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    XxxContent,
+  ],
+  selector: 'extended-xxx-user',
+  templateUrl: './xxx-user.html',
+})
 class ExtendedXxxUser extends XxxUser {
   override rowClick(user: XxxUserType) {
     super.rowClick(user);
