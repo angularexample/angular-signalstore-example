@@ -33,11 +33,11 @@ describe('XxxUserData', () => {
   });
 
   describe('getUsers', () => {
-    it('should return a content item', async () => {
+    it('should return an array of user items', async () => {
       const response$: Observable<XxxUserApiResponse> = service.getUsers();
       const resultPromise: Promise<XxxUserApiResponse> = firstValueFrom(response$);
       const url = 'https://dummyjson.com/users/?delay=2000'
-      const req = httpTestingController.expectOne(url, 'Request to get the content');
+      const req = httpTestingController.expectOne(url, 'Request to get the users');
       // Assert the request URL
       expect(req.request.url).toBe(url);
       // Assert the request method
