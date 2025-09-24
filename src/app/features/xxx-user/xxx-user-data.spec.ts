@@ -9,7 +9,6 @@ import { XxxUserApiResponse } from './xxx-user-types';
 describe('XxxUserData', () => {
   let service: XxxUserData;
   let httpTestingController: HttpTestingController;
-  const key: string = 'content-key';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
