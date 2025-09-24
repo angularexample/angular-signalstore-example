@@ -24,9 +24,7 @@ class ExtendedXxxPost extends XxxPost {
 
 describe('XxxPost', () => {
   let component: ExtendedXxxPost;
-  const contentKey: string = 'post';
   let fixture: ComponentFixture<ExtendedXxxPost>;
-  const mockPostId: number = 1;
 
   const mockXxxContentFacade = {
     contentByKey: jest.fn(),
