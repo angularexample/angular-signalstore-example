@@ -1,21 +1,28 @@
-import { provideHttpClient } from '@angular/common/http';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { XxxContentFacade } from '../../core/xxx-content/xxx-content-facade';
 import { XxxHome } from './xxx-home';
 import { XxxSanitizePipe } from '../../core/xxx-sanitize/xxx-sanitize-pipe';
 
-describe('XxxHeader', () => {
+describe('XxxHome', () => {
+  let component: XxxHome;
+  let fixture: ComponentFixture<XxxHome>;
+
+  const mockXxxContentFacade = {
+    contentByKey: jest.fn(),
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [XxxHome, XxxSanitizePipe],
       providers: [
-        provideHttpClient()
+        {provide: XxxContentFacade, useValue: mockXxxContentFacade},
       ]
     }).compileComponents();
+    fixture = TestBed.createComponent(XxxHome);
+    component = fixture.componentInstance;
   });
 
   it('should create the component', () => {
-    const fixture = TestBed.createComponent(XxxHome);
-    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });
