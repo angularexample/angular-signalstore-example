@@ -1,22 +1,30 @@
-import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { XxxHeader } from './xxx-header';
+import { XxxContentFacade } from '../../core/xxx-content/xxx-content-facade';
 
 describe('XxxHeader', () => {
+  let fixture: ComponentFixture<XxxHeader>;
+  let component: XxxHeader;
+  const mockXxxContentFacade = {
+    contentByKey: jest.fn(),
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [XxxHeader],
       providers: [
-        provideHttpClient(),
+        {provide: XxxContentFacade, useValue: mockXxxContentFacade},
         provideRouter([])
       ]
     }).compileComponents();
+    fixture = TestBed.createComponent(XxxHeader);
+    component = fixture.componentInstance;
   });
 
-  it('should create the component', () => {
-    const fixture = TestBed.createComponent(XxxHeader);
-    const component = fixture.componentInstance;
-    expect(component).toBeTruthy();
+  describe('construction', () => {
+    it('should create the component', () => {
+      expect(component).toBeTruthy();
+    });
   });
 });
