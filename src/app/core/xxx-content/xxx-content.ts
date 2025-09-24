@@ -10,11 +10,11 @@ export class XxxContent implements OnInit {
   contentKey:InputSignal<string> = input<string>('');
   private contentFacade: XxxContentFacade = inject(XxxContentFacade);
   protected isContentEmpty: Signal<boolean> = signal(false);
-  protected isContentLoading: Signal<boolean> = signal(false);
+  protected isContentError: Signal<boolean> = signal(false);
 
   ngOnInit(): void {
     this.contentFacade.showContent(this.contentKey());
     this.isContentEmpty = this.contentFacade.isContentEmpty(this.contentKey());
-    this.isContentLoading = this.contentFacade.isContentLoading(this.contentKey());
+    this.isContentError = this.contentFacade.isContentError(this.contentKey());
   }
 }

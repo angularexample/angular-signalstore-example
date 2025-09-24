@@ -22,7 +22,7 @@ describe('XxxContent', () => {
   const mockXxxContentFacade = {
     contentByKey: jest.fn().mockReturnValue(signal(mockContentHome)),
     isContentEmpty: jest.fn().mockReturnValue(signal(false)),
-    isContentLoading: jest.fn().mockReturnValue(signal(false)),
+    isContentError: jest.fn().mockReturnValue(signal(false)),
     showContent: jest.fn(),
   };
 
@@ -50,17 +50,17 @@ describe('XxxContent', () => {
       expect(contentComponent.contentKey()).toBe(mockContentKey);
     });
 
-    it('should run contentFacade.isContentEmpty()', async () => {
+    it('should run contentFacade.isContentEmpty', async () => {
       await hostFixture.whenStable();
       expect(mockXxxContentFacade.isContentEmpty).toHaveBeenCalledWith(mockContentKey);
     });
 
-    it('should run contentFacade.isContentLoading()', async () => {
+    it('should run contentFacade.isContentError', async () => {
       await hostFixture.whenStable();
-      expect(mockXxxContentFacade.isContentLoading).toHaveBeenCalledWith(mockContentKey);
+      expect(mockXxxContentFacade.isContentError).toHaveBeenCalledWith(mockContentKey);
     });
 
-    it('should run contentFacade.showContent()', async () => {
+    it('should run contentFacade.showContent', async () => {
       await hostFixture.whenStable();
       expect(mockXxxContentFacade.showContent).toHaveBeenCalledWith(mockContentKey);
     });

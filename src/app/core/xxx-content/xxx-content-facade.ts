@@ -9,7 +9,7 @@ export class XxxContentFacade {
   private contentStore = inject(XxxContentStore);
   readonly contentByKey = (key: string): Signal<XxxContentType | undefined> => this.contentStore.contentByKey(key);
   readonly isContentEmpty = (key: string): Signal<boolean> => this.contentStore.isContentEmpty(key);
-  readonly isContentLoading = (key: string): Signal<boolean> => this.contentStore.isContentLoading(key);
+  readonly isContentError = (key: string): Signal<boolean> => this.contentStore.isContentError(key);
 
   /**
    * Call this when you render a page that needs content.

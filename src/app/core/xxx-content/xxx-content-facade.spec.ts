@@ -6,7 +6,7 @@ describe('XxxContentFacade', () => {
   const mockXxxContentStore = {
     contentByKey: jest.fn(),
     isContentEmpty: jest.fn(),
-    isContentLoading: jest.fn(),
+    isContentError: jest.fn(),
     showContent: jest.fn(),
   };
   let service: XxxContentFacade;
@@ -33,28 +33,28 @@ describe('XxxContentFacade', () => {
       expect(service.isContentEmpty).toBeDefined();
     });
 
-    it('should have isContentLoading', () => {
-      expect(service.isContentLoading).toBeDefined();
+    it('should have isContentError', () => {
+      expect(service.isContentError).toBeDefined();
     });
   })
 
   describe('methods', () => {
-    it('should run contentStore.contentByKey()', () => {
+    it('should run contentStore.contentByKey', () => {
       service.contentByKey(contentKey);
       expect(mockXxxContentStore.contentByKey).toHaveBeenCalledWith(contentKey);
     });
 
-    it('should run contentStore.isContentEmpty()', () => {
+    it('should run contentStore.isContentEmpty', () => {
       service.isContentEmpty(contentKey);
       expect(mockXxxContentStore.isContentEmpty).toHaveBeenCalledWith(contentKey);
     });
 
-    it('should run contentStore.isContentLoading()', () => {
-      service.isContentLoading(contentKey);
-      expect(mockXxxContentStore.isContentLoading).toHaveBeenCalledWith(contentKey);
+    it('should run contentStore.isContentLoading', () => {
+      service.isContentError(contentKey);
+      expect(mockXxxContentStore.isContentError).toHaveBeenCalledWith(contentKey);
     });
 
-    it('should run contentStore.showContent()', () => {
+    it('should run contentStore.showContent', () => {
       service.showContent(contentKey);
       expect(mockXxxContentStore.showContent).toHaveBeenCalledWith(contentKey);
     });

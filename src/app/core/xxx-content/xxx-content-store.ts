@@ -59,7 +59,6 @@ export const XxxContentStore = signalStore(
           .pipe(
             catchError(() => {
               isError = true;
-              content.status = XxxContentStatus.ERROR;
               alertService.showError(`Error. Unable to get content for ${key}`)
               return of({});
             })
@@ -98,9 +97,9 @@ export const XxxContentStore = signalStore(
         const content: XxxContentType | undefined = store.contentByKey(key)();
         return content !== undefined && content.status === XxxContentStatus.EMPTY;
       }),
-      isContentLoading: (key: string): Signal<boolean> => computed(() => {
+      isContentError: (key: string): Signal<boolean> => computed(() => {
         const content: XxxContentType | undefined = store.contentByKey(key)();
-        return content !== undefined && content.status === XxxContentStatus.LOADING;
+        return content !== undefined && content.status === XxxContentStatus.ERROR;
       }),
       showContent: (key: string): void => {
         if (!store.contents().some((item: XxxContentType) => item.key === key)) {
