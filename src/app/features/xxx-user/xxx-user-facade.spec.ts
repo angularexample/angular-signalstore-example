@@ -50,14 +50,14 @@ describe('XxxUserFacade', () => {
   })
 
   describe('showUsers', () => {
-    it('should be created', () => {
+    it('should call userStore.showUsers', () => {
       service.showUsers();
       expect(mockXxxUserStore.showUsers).toHaveBeenCalled();
     });
   });
 
   describe('setSelectedUser', () => {
-    it('should be created', () => {
+    it('should should call userStore.setSelectedUser', () => {
       service.setSelectedUser(mockUserId);
       expect(mockXxxUserStore.setSelectedUser).toHaveBeenCalledWith(mockUserId);
     });
