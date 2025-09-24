@@ -100,7 +100,6 @@ describe('XxxContentStore', () => {
 
   describe('isContentError', () => {
     it('should return true when content has error', () => {
-      const errorMessage: string = `Error. Unable to get content for ${contentKey}`;
       mockXxxContentData.getContent.mockReturnValue(throwError(() => new Error('some error')));
       service.loadContent(contentKey);
       const result: Signal<boolean> = service.isContentError(contentKey);
