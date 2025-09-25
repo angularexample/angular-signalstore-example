@@ -19,7 +19,6 @@ export class XxxPost {
   protected readonly content: Signal<XxxContentType | undefined> = this.contentFacade.contentByKey(this.contentKey);
   private postFacade: XxxPostFacade = inject(XxxPostFacade);
   protected readonly isNoSelectedUser: Signal<boolean> = this.postFacade.isNoSelectedUser;
-  protected readonly isPostsEmpty: Signal<boolean> = this.postFacade.isPostsEmpty;
   protected readonly isPostsLoaded: Signal<boolean> = this.postFacade.isPostsLoaded;
   protected readonly posts: Signal<XxxPostType[]> = this.postFacade.posts;
   protected readonly selectedPostId: Signal<number | undefined> | undefined= this.postFacade.selectedPostId;

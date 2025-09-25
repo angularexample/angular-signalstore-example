@@ -13,10 +13,7 @@
         @if (selectedUserId && selectedUserId()) {
           <p>User Id: {{ selectedUserId() }}</p>
         }
-        @if (isPostsEmpty()) {
-          <p>None found. Try a different user.</p>
-        }
-        @else if (isPostsLoaded()) {
+        @if (isPostsLoaded()) {
           <table class="xxx-table">
             <tr>
               <th class="xxx-table-cell-header">Id</th>
@@ -34,6 +31,8 @@
               </tr>
             }
           </table>
+        } @else {
+          <p>None found. Try a different user.</p>
         }
       </section>
     }
