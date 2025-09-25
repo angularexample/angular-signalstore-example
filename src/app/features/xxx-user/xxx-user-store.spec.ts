@@ -1,16 +1,33 @@
+import { Component, Signal } from '@angular/core';
 import { mockXxxUserApiResponse } from './xxx-user.mocks';
 import { of, throwError } from 'rxjs';
 import { provideHttpClient } from '@angular/common/http';
-import { Router, RouterModule } from '@angular/router';
-import { Signal } from '@angular/core';
+import { provideRouter, Route, Router } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
 import { XxxAlert } from '../../core/xxx-alert/xxx-alert';
 import { XxxLoadingService } from '../../core/xxx-loading/xxx-loading-service';
 import { XxxUserData } from './xxx-user-data';
 import { XxxUserStore } from './xxx-user-store';
 
+@Component({
+  selector: 'xxx-dummy',
+  template: ``,
+})
+class XxxDummyComponent {
+}
+
 describe('XxxUserStore', () => {
   const mockUserId = 1;
+  let router: Router;
+  let spyRouterNavigate: jest.SpyInstance;
+  let store: any;
+
+  const mockRoutes: Route[] = [
+    {
+      path: '**',
+      component: XxxDummyComponent
+    },
+  ];
 
   const mockXxxAlert = {
     showError: jest.fn(),
@@ -27,23 +44,23 @@ describe('XxxUserStore', () => {
     getUsers: jest.fn()
   }
 
-  TestBed.configureTestingModule({
-    imports: [
-      RouterModule.forRoot([])
-    ],
-    providers: [
-      provideHttpClient(),
-      {provide: XxxAlert, useValue: mockXxxAlert},
-      {provide: XxxLoadingService, useValue: mockXxxLoadingService},
-      {provide: XxxUserData, useValue: mockXxxUserData},
-      XxxUserStore
-    ],
-  });
-  const router = TestBed.inject(Router);
-  const store = TestBed.inject(XxxUserStore);
-  const spyRouterNavigate: jest.SpyInstance = jest.spyOn(router, 'navigateByUrl');
-
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        provideHttpClient(),
+        provideRouter(mockRoutes),
+        {provide: XxxAlert, useValue: mockXxxAlert},
+        {provide: XxxLoadingService, useValue: mockXxxLoadingService},
+        {provide: XxxUserData, useValue: mockXxxUserData},
+        XxxUserStore
+      ],
+    });
+    router = TestBed.inject(Router);
+    store = TestBed.inject(XxxUserStore);
+    spyRouterNavigate = jest.spyOn(router, 'navigateByUrl');
+  });
+
+  afterEach(() => {
     mockXxxAlert.showError.mockClear();
     mockXxxLoadingService.loadingOff.mockClear();
     mockXxxLoadingService.loadingOn.mockClear();
