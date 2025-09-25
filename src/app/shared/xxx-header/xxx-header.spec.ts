@@ -24,7 +24,7 @@ describe('XxxHeader', () => {
 
   describe('construction', () => {
     it('should create the component', () => {
-      expect(component).toBeTruthy();
+      expect(component).toBeDefined();
     });
   });
 });

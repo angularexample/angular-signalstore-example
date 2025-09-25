@@ -23,6 +23,6 @@ describe('XxxHome', () => {
   });
 
   it('should create the component', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeDefined();
   });
 });
