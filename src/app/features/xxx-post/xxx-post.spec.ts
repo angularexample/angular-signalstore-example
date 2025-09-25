@@ -42,7 +42,7 @@ describe('XxxPost', () => {
     selectedPostId: jest.fn().mockReturnValue(signal(mockPost.id)),
     selectedUserId: jest.fn().mockReturnValue(signal(mockPost.userId)),
     setPostForm: jest.fn(),
-    setSelectedPost: jest.fn(),
+    setSelectedPostId: jest.fn(),
     showPosts: jest.fn(),
     updatePost: jest.fn(),
   }
@@ -66,9 +66,9 @@ describe('XxxPost', () => {
   });
 
   describe('selectPost', () => {
-    it('should call postFacade.setSelectedPost', () => {
+    it('should call postFacade.setSelectedPostId', () => {
       component.selectPost(mockPost);
-      expect(mockXxxPostFacade.setSelectedPost).toHaveBeenCalledWith(mockPost.id);
+      expect(mockXxxPostFacade.setSelectedPostId).toHaveBeenCalledWith(mockPost.id);
     });
   });
 });

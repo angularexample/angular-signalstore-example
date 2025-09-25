@@ -18,12 +18,12 @@ export class XxxPostFacade {
   readonly selectedPostId: Signal<number | undefined> | undefined = this.postStore.selectedPostId;
   readonly selectedUserId: Signal<number | undefined> | undefined= this.postStore.selectedUserId;
 
-  setSelectedPost(postId: number): void {
-    this.postStore.setSelectedPost(postId);
-  }
-
   setPostForm(post: XxxPostType): void {
     this.postStore.setPostForm(post)
+  }
+
+  setSelectedPostId(postId: number): void {
+    this.postStore.setSelectedPostId(postId);
   }
 
   showPosts(): void {

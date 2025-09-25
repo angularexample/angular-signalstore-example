@@ -15,7 +15,7 @@ describe('XxxPostFacade', () => {
     selectedPost: jest.fn(),
     selectedPostId: jest.fn(),
     selectedUserId: jest.fn(),
-    setSelectedPost: jest.fn(),
+    setSelectedPostId: jest.fn(),
     setPostForm: jest.fn(),
     showPosts: jest.fn(),
     updatePost: jest.fn(),
@@ -76,10 +76,10 @@ describe('XxxPostFacade', () => {
     });
   })
 
-  describe('setSelectedPost', () => {
-    it('should call postStore.setSelectedPost', () => {
-      service.setSelectedPost(mockPost.id);
-      expect(mockXxxPostStore.setSelectedPost).toHaveBeenCalledWith(mockPost.id);
+  describe('setSelectedPostId', () => {
+    it('should call postStore.setSelectedPostId', () => {
+      service.setSelectedPostId(mockPost.id);
+      expect(mockXxxPostStore.setSelectedPostId).toHaveBeenCalledWith(mockPost.id);
     });
   });
 

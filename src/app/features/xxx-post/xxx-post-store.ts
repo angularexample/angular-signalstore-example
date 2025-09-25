@@ -109,7 +109,7 @@ export const XxxPostStore = signalStore(
       setPostForm: (post: XxxPostType): void => {
         patchState(store, {postForm: post});
       },
-      setSelectedPost: (postId: number): void => {
+      setSelectedPostId: (postId: number): void => {
         patchState(store, {postForm: undefined, selectedPostId: postId});
         void router.navigateByUrl('/post/edit')
       },
