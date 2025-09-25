@@ -5,9 +5,9 @@ import { Router, RouterModule } from '@angular/router';
 import { Signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { XxxAlert } from '../../core/xxx-alert/xxx-alert';
+import { XxxLoadingService } from '../../core/xxx-loading/xxx-loading-service';
 import { XxxUserData } from './xxx-user-data';
 import { XxxUserStore } from './xxx-user-store';
-import { XxxLoadingService } from '../../core/xxx-loading/xxx-loading-service';
 
 describe('XxxUserStore', () => {
   const mockUserId = 1;
