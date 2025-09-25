@@ -40,7 +40,7 @@ describe('XxxUserStore', () => {
     ],
   });
   const router = TestBed.inject(Router);
-  const service = TestBed.inject(XxxUserStore);
+  const store = TestBed.inject(XxxUserStore);
   const spyRouterNavigate: jest.SpyInstance = jest.spyOn(router, 'navigateByUrl');
 
   beforeEach(() => {
@@ -54,51 +54,51 @@ describe('XxxUserStore', () => {
 
   describe('constructor phase', () => {
     it('should be created', () => {
-      expect(service).toBeDefined();
+      expect(store).toBeDefined();
     });
 
     it('should have isUsersEmpty', () => {
-      expect(service.isUsersEmpty).toBeDefined();
+      expect(store.isUsersEmpty).toBeDefined();
     });
 
     it('should have isUsersLoaded', () => {
-      expect(service.isUsersLoaded).toBeDefined();
+      expect(store.isUsersLoaded).toBeDefined();
     });
 
     it('should have loadUsers', () => {
-      expect(service.loadUsers).toBeDefined();
+      expect(store.loadUsers).toBeDefined();
     });
 
     it('should have setSelectedUser', () => {
-      expect(service.setSelectedUser).toBeDefined();
+      expect(store.setSelectedUser).toBeDefined();
     });
 
     it('should have showUsers', () => {
-      expect(service.showUsers).toBeDefined();
+      expect(store.showUsers).toBeDefined();
     });
   })
 
   describe('isUsersEmpty', () => {
     it('should be true after initial state', () => {
-      const result: Signal<boolean> = service.isUsersEmpty;
+      const result: Signal<boolean> = store.isUsersEmpty;
       expect(result()).toBeTruthy();
     });
 
     it('should false after load users', () => {
-      service.loadUsers();
-      const result: Signal<boolean> = service.isUsersEmpty;
+      store.loadUsers();
+      const result: Signal<boolean> = store.isUsersEmpty;
       expect(result()).toBeFalsy();
     });
   })
 
   describe('loadUsers', () => {
     it('should run XxxUserData.getUsers', () => {
-      service.loadUsers();
+      store.loadUsers();
       expect(mockXxxUserData.getUsers).toHaveBeenCalled();
     });
 
     it('should run XxxLoadingService.loadingOn and loadingOff', () => {
-      service.loadUsers();
+      store.loadUsers();
       expect(mockXxxLoadingService.loadingOn).toHaveBeenCalled();
       expect(mockXxxLoadingService.loadingOff).toHaveBeenCalled();
     });
@@ -106,34 +106,34 @@ describe('XxxUserStore', () => {
     it('should run XxxAlert.showError on error', () => {
       const errorMessage: string = `Error. Unable to get users`;
       mockXxxUserData.getUsers.mockReturnValue(throwError(() => new Error('some error')));
-      service.loadUsers();
+      store.loadUsers();
       expect(mockXxxAlert.showError).toHaveBeenCalledWith(errorMessage);
     });
   })
 
   describe('setSelectedUser', () => {
     it('should have expected selected user id', () => {
-      service.setSelectedUser(mockUserId);
-      const result: Signal<number | undefined> = service.selectedUserId;
+      store.setSelectedUser(mockUserId);
+      const result: Signal<number | undefined> = store.selectedUserId;
       expect(result()).toEqual(mockUserId);
     });
 
     it('should run router navigate', () => {
-      service.setSelectedUser(mockUserId);
+      store.setSelectedUser(mockUserId);
       expect(spyRouterNavigate).toHaveBeenCalledWith('/post');
     });
   });
 
   describe('showUsers', () => {
     it('should call loadUsers when users are empty', () => {
-      service.showUsers();
+      store.showUsers();
       expect(mockXxxUserData.getUsers).toHaveBeenCalled();
     });
 
     it('should not call loadUsers when users is not empty', () => {
-      service.loadUsers();
+      store.loadUsers();
       mockXxxUserData.getUsers.mockClear();
-      service.showUsers();
+      store.showUsers();
       expect(mockXxxUserData.getUsers).not.toHaveBeenCalled();
     });
   });
