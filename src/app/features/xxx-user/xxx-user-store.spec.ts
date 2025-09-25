@@ -7,6 +7,7 @@ import { TestBed } from '@angular/core/testing';
 import { XxxAlert } from '../../core/xxx-alert/xxx-alert';
 import { XxxUserData } from './xxx-user-data';
 import { XxxUserStore } from './xxx-user-store';
+import { XxxLoadingService } from '../../core/xxx-loading/xxx-loading-service';
 
 describe('XxxUserStore', () => {
   const mockUserId = 1;
@@ -15,6 +16,11 @@ describe('XxxUserStore', () => {
     showError: jest.fn(),
     showInfo: jest.fn(),
     showWarning: jest.fn(),
+  }
+
+  const mockXxxLoadingService = {
+    loadingOff: jest.fn(),
+    loadingOn: jest.fn(),
   }
 
   const mockXxxUserData = {
@@ -28,6 +34,7 @@ describe('XxxUserStore', () => {
     providers: [
       provideHttpClient(),
       {provide: XxxAlert, useValue: mockXxxAlert},
+      {provide: XxxLoadingService, useValue: mockXxxLoadingService},
       {provide: XxxUserData, useValue: mockXxxUserData},
       XxxUserStore
     ],
@@ -38,6 +45,8 @@ describe('XxxUserStore', () => {
 
   beforeEach(() => {
     mockXxxAlert.showError.mockClear();
+    mockXxxLoadingService.loadingOff.mockClear();
+    mockXxxLoadingService.loadingOn.mockClear();
     mockXxxUserData.getUsers.mockClear();
     mockXxxUserData.getUsers.mockReturnValue(of(mockXxxUserApiResponse));
     spyRouterNavigate.mockClear();
@@ -83,12 +92,18 @@ describe('XxxUserStore', () => {
   })
 
   describe('loadUsers', () => {
-    it('should handle success', () => {
+    it('should run XxxUserData.getUsers', () => {
       service.loadUsers();
       expect(mockXxxUserData.getUsers).toHaveBeenCalled();
     });
 
-    it('should handle error', () => {
+    it('should run XxxLoadingService.loadingOn and loadingOff', () => {
+      service.loadUsers();
+      expect(mockXxxLoadingService.loadingOn).toHaveBeenCalled();
+      expect(mockXxxLoadingService.loadingOff).toHaveBeenCalled();
+    });
+
+    it('should run XxxAlert.showError on error', () => {
       const errorMessage: string = `Error. Unable to get users`;
       mockXxxUserData.getUsers.mockReturnValue(throwError(() => new Error('some error')));
       service.loadUsers();
