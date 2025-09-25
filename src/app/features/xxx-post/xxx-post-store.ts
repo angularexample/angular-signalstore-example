@@ -46,7 +46,7 @@ export const XxxPostStore = signalStore(
         let post: XxxPostType | undefined;
         const posts: XxxPostType[] = store.posts();
         const selectedPostId: Signal<number | undefined> | undefined = store.selectedPostId;
-        if (selectedPostId) {
+        if (selectedPostId && selectedPostId() !== undefined) {
           post = posts.find(item => item.id === selectedPostId());
         }
         return post;
@@ -59,7 +59,10 @@ export const XxxPostStore = signalStore(
   // And then you can use that computed property in a separate withComputed block.
   withComputed((store) => ({
       isNoSelectedPost: computed(() => store.selectedPostId === undefined ||
-        store.selectedPost === undefined),
+        store.selectedPostId() === undefined ||
+        store.selectedPost === undefined ||
+        store.selectedPost() === undefined
+      ),
     })
   ),
   withComputed((store) => ({
@@ -108,6 +111,9 @@ export const XxxPostStore = signalStore(
         patchState(store, {postForm: undefined, selectedPostId: postId});
         void router.navigateByUrl('/post/edit')
       },
+      setSelectedUserId: (userId: number): void => {
+        patchState(store, {...xxxPostInitialState, selectedUserId: userId});
+      },
       updatePost: (): void => {
         loadingService.loadingOn();
         const post: XxxPostType | undefined = store.postForm ? store.postForm() : undefined;
@@ -142,14 +148,14 @@ export const XxxPostStore = signalStore(
       // Logic to show user posts
       // 1. If there is no selected user in the user state, then do nothing
       // 2. If the selected user is different from the user id in the Post state,
-      //    then set the user id in the Post state to the selected user id
-      // 3. If posts are not loaded, then get the user posts
+      //    then run setSelectedUserId
+      // 3. If posts are not loaded, then run loadPosts
       showPosts: (): void => {
         const userSelectedUserId: number | undefined = userFacade.selectedUserId();
         if (userSelectedUserId !== undefined) {
           const postSelectedUserId: number | undefined = store.selectedUserId ? store.selectedUserId() : undefined;
           if (!postSelectedUserId || (postSelectedUserId && postSelectedUserId !== userSelectedUserId)) {
-            patchState(store, {...xxxPostInitialState, selectedUserId: userSelectedUserId});
+            store.setSelectedUserId(userSelectedUserId);
           }
           if (!store.isPostsLoaded()) {
             store.loadPosts();
