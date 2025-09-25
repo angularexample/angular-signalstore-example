@@ -62,11 +62,7 @@ describe('XxxUserStore', () => {
   });
 
   afterEach(() => {
-    mockXxxAlert.showError.mockClear();
-    mockXxxLoadingService.loadingOff.mockClear();
-    mockXxxLoadingService.loadingOn.mockClear();
-    mockXxxUserData.getUsers.mockClear();
-    spyRouterNavigate.mockClear();
+    jest.clearAllMocks();
   });
 
   describe('constructor phase', () => {
