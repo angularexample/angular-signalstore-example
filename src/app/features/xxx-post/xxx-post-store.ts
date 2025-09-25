@@ -1,5 +1,6 @@
 import { catchError, of } from 'rxjs';
 import { computed, inject, Signal } from '@angular/core';
+import { isPostsEqual } from './xxx-post-utilities';
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { Router } from '@angular/router';
 import { XxxAlert } from '../../core/xxx-alert/xxx-alert';
@@ -7,7 +8,6 @@ import { XxxLoadingService } from '../../core/xxx-loading/xxx-loading-service';
 import { xxxPostInitialState, XxxPostState, XxxPostType } from './xxx-post-types';
 import { XxxPostData } from './xxx-post-data'
 import { XxxUserFacade } from '../xxx-user/xxx-user-facade';
-import { isPostsEqual } from './xxx-post-utilities';
 
 /**
  * XxxPostStore is the feature state for the post and post-edit pages.
@@ -39,7 +39,8 @@ export const XxxPostStore = signalStore(
   // Computed properties are properties that are derived from other properties.
   // They cannot have a parameter.
   withComputed((store) => ({
-      isNoSelectedUser: computed(() => store.selectedUserId === undefined),
+      isNoSelectedUser: computed(() => store.selectedUserId === undefined ||
+        store.selectedUserId() === undefined),
       isPostsEmpty: computed(() => !store.isPostsLoading() && store.posts().length === 0),
       isPostsLoaded: computed(() => !store.isPostsLoading() && store.posts().length > 0),
       selectedPost: computed(() => {
@@ -63,18 +64,13 @@ export const XxxPostStore = signalStore(
         store.selectedPost === undefined ||
         store.selectedPost() === undefined
       ),
-    })
-  ),
-  withComputed((store) => ({
       isSaveButtonDisabled: computed(() => {
         const postForm: XxxPostType | undefined = store.postForm !== undefined ? store.postForm() : undefined;
         const selectedPost: XxxPostType | undefined = store.selectedPost !== undefined ? store.selectedPost() : undefined;
-        const isPostFormEqual: boolean = isPostsEqual(postForm, selectedPost);
-        return (!store.isPostsLoaded()) || (selectedPost === undefined) || (postForm === undefined) || isPostFormEqual;
+        return isPostsEqual(postForm, selectedPost);
       })
     })
   ),
-
   // If you need to run a side effect, then you need to use withMethod.
   // If you need to run a method that requires parameters, then you need to use withMethods.
   // if you need to have a computed signal that requires parameters, then you need to use withMethods.
@@ -115,18 +111,19 @@ export const XxxPostStore = signalStore(
         patchState(store, {...xxxPostInitialState, selectedUserId: userId});
       },
       updatePost: (): void => {
-        loadingService.loadingOn();
         const post: XxxPostType | undefined = store.postForm ? store.postForm() : undefined;
         if (post === undefined) {
           //unexpected error, post should not be undefined
-          alertService.showError('Error. No post available to update.');
-          return;
+          const errorMessage: string = 'Error. No post available to update.'
+          alertService.showError(errorMessage);
         } else {
+          loadingService.loadingOn();
           let isError: boolean = false;
           postData.updatePost(post).pipe(
             catchError(() => {
               isError = true;
-              alertService.showError('Error. Unable to update post:  ' + post.id);
+              const errorMessage: string = `Error. Unable to update post: ${post.id}`;
+              alertService.showError(errorMessage);
               return of({});
             })
           ).subscribe((postResponse: XxxPostType | {}) => {
@@ -157,8 +154,8 @@ export const XxxPostStore = signalStore(
           if (!postSelectedUserId || (postSelectedUserId && postSelectedUserId !== userSelectedUserId)) {
             store.setSelectedUserId(userSelectedUserId);
           }
-          if (!store.isPostsLoaded()) {
-            store.loadPosts();
+          if (store.isPostsEmpty()) {
+            store.loadPosts()
           }
         }
       }
