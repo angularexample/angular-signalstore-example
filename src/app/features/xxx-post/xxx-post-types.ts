@@ -1,7 +1,6 @@
 export interface XxxPostType {
   body: string;
   id: number;
-  isUpdating?: boolean;
   title: string;
   userId: number;
 }
@@ -15,7 +14,6 @@ export const xxxPostFormDataInitial: XxxPostType = {
 
 // SignalStore withState initial state requires all properties to be defined
 export const xxxPostInitialState: XxxPostState = {
-  isPostsLoading: false,
   postForm: undefined,
   posts: [],
   selectedPostId: undefined,
@@ -23,7 +21,6 @@ export const xxxPostInitialState: XxxPostState = {
 };
 
 export interface XxxPostState {
-  isPostsLoading: boolean;
   postForm?: XxxPostType;
   posts: XxxPostType[];
   selectedPostId?: number;

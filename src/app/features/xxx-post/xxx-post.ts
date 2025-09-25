@@ -21,7 +21,6 @@ export class XxxPost {
   protected readonly isNoSelectedUser: Signal<boolean> = this.postFacade.isNoSelectedUser;
   protected readonly isPostsEmpty: Signal<boolean> = this.postFacade.isPostsEmpty;
   protected readonly isPostsLoaded: Signal<boolean> = this.postFacade.isPostsLoaded;
-  protected readonly isPostsLoading: Signal<boolean> = this.postFacade.isPostsLoading;
   protected readonly posts: Signal<XxxPostType[]> = this.postFacade.posts;
   protected readonly selectedPostId: Signal<number | undefined> | undefined= this.postFacade.selectedPostId;
   protected readonly selectedUserId: Signal<number | undefined> | undefined= this.postFacade.selectedUserId;

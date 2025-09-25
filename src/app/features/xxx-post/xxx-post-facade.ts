@@ -9,9 +9,7 @@ export class XxxPostFacade {
   private postStore = inject(XxxPostStore);
   readonly isNoSelectedPost: Signal<boolean> = this.postStore.isNoSelectedPost;
   readonly isNoSelectedUser: Signal<boolean> = this.postStore.isNoSelectedUser;
-  readonly isPostsEmpty: Signal<boolean> = this.postStore.isPostsEmpty;
   readonly isPostsLoaded: Signal<boolean> = this.postStore.isPostsLoaded;
-  readonly isPostsLoading: Signal<boolean> = this.postStore.isPostsLoading;
   readonly isSaveButtonDisabled: Signal<boolean> = this.postStore.isSaveButtonDisabled;
   readonly posts: Signal<XxxPostType[]> = this.postStore.posts;
   readonly selectedPost: Signal<XxxPostType | undefined> = this.postStore.selectedPost;
