@@ -36,7 +36,7 @@ describe('XxxUser', () => {
     isUsersLoaded: jest.fn().mockReturnValue(signal(false)),
     isUsersLoading: jest.fn().mockReturnValue(signal(false)),
     selectedUserId: jest.fn().mockReturnValue(signal(mockUserId)),
-    setSelectedUser: jest.fn(),
+    setSelectedUserId: jest.fn(),
     showUsers: jest.fn(),
     users: jest.fn().mockReturnValue(signal(mockUsers)),
   }
@@ -62,7 +62,7 @@ describe('XxxUser', () => {
   describe('rowClick', () => {
     it('should call userFacade.setSelectedUser', () => {
       component.rowClick(mockUser);
-      expect(mockXxxUserFacade.setSelectedUser).toHaveBeenCalledWith(mockUser.id);
+      expect(mockXxxUserFacade.setSelectedUserId).toHaveBeenCalledWith(mockUser.id);
     });
   });
 });

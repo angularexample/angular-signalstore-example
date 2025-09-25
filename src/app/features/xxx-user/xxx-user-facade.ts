@@ -17,7 +17,7 @@ export class XxxUserFacade {
     this.userStore.showUsers();
   }
 
-  setSelectedUser(userId: number): void {
-    this.userStore.setSelectedUser(userId);
+  setSelectedUserId(userId: number): void {
+    this.userStore.setSelectedUserId(userId);
   }
 }

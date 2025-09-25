@@ -9,11 +9,11 @@ describe('XxxUserFacade', () => {
     isUsersLoaded: jest.fn(),
     isUsersLoading: jest.fn(),
     selectedUserId: jest.fn(),
-    setSelectedUser: jest.fn(),
+    setSelectedUserId: jest.fn(),
     showUsers: jest.fn(),
     users: jest.fn(),
   };
-  let service: XxxUserFacade;
+  let store: XxxUserFacade;
 
   TestBed.configureTestingModule({
     providers: [
@@ -22,44 +22,44 @@ describe('XxxUserFacade', () => {
     ],
   });
 
-  service = TestBed.inject(XxxUserFacade);
+  store = TestBed.inject(XxxUserFacade);
   describe('constructor phase', () => {
     it('should be created', () => {
-      expect(service).toBeDefined();
+      expect(store).toBeDefined();
     });
 
     it('should have isUsersEmpty', () => {
-      expect(service.isUsersEmpty).toBeDefined();
+      expect(store.isUsersEmpty).toBeDefined();
     });
 
     it('should have isUsersLoaded', () => {
-      expect(service.isUsersLoaded).toBeDefined();
+      expect(store.isUsersLoaded).toBeDefined();
     });
 
     it('should have isUsersLoading', () => {
-      expect(service.isUsersLoading).toBeDefined();
+      expect(store.isUsersLoading).toBeDefined();
     });
 
     it('should have selectedUserId', () => {
-      expect(service.selectedUserId).toBeDefined();
+      expect(store.selectedUserId).toBeDefined();
     });
 
     it('should have users', () => {
-      expect(service.users).toBeDefined();
+      expect(store.users).toBeDefined();
     });
   })
 
   describe('showUsers', () => {
     it('should call userStore.showUsers', () => {
-      service.showUsers();
+      store.showUsers();
       expect(mockXxxUserStore.showUsers).toHaveBeenCalled();
     });
   });
 
-  describe('setSelectedUser', () => {
-    it('should should call userStore.setSelectedUser', () => {
-      service.setSelectedUser(mockUserId);
-      expect(mockXxxUserStore.setSelectedUser).toHaveBeenCalledWith(mockUserId);
+  describe('setSelectedUserId', () => {
+    it('should should call userStore.setSelectedUserId', () => {
+      store.setSelectedUserId(mockUserId);
+      expect(mockXxxUserStore.setSelectedUserId).toHaveBeenCalledWith(mockUserId);
     });
   });
 });

@@ -70,7 +70,7 @@ export const XxxUserStore = signalStore(
             loadingService.loadingOff();
           });
       },
-      setSelectedUser: (userId: number): void => {
+      setSelectedUserId: (userId: number): void => {
         patchState(store, {selectedUserId: userId});
         void router.navigateByUrl('/post')
       }

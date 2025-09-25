@@ -86,8 +86,8 @@ describe('XxxUserStore', () => {
       expect(store.loadUsers).toBeDefined();
     });
 
-    it('should have setSelectedUser', () => {
-      expect(store.setSelectedUser).toBeDefined();
+    it('should have setSelectedUserId', () => {
+      expect(store.setSelectedUserId).toBeDefined();
     });
 
     it('should have showUsers', () => {
@@ -128,15 +128,15 @@ describe('XxxUserStore', () => {
     });
   })
 
-  describe('setSelectedUser', () => {
+  describe('setSelectedUserId', () => {
     it('should have expected selected user id', () => {
-      store.setSelectedUser(mockUserId);
+      store.setSelectedUserId(mockUserId);
       const result: Signal<number | undefined> = store.selectedUserId;
       expect(result()).toEqual(mockUserId);
     });
 
     it('should run router navigate', () => {
-      store.setSelectedUser(mockUserId);
+      store.setSelectedUserId(mockUserId);
       expect(spyRouterNavigate).toHaveBeenCalledWith('/post');
     });
   });
