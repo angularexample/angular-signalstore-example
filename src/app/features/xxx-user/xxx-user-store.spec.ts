@@ -58,6 +58,7 @@ describe('XxxUserStore', () => {
     router = TestBed.inject(Router);
     store = TestBed.inject(XxxUserStore);
     spyRouterNavigate = jest.spyOn(router, 'navigateByUrl');
+    mockXxxUserData.getUsers.mockReturnValue(of(mockXxxUserApiResponse));
   });
 
   afterEach(() => {
@@ -65,7 +66,6 @@ describe('XxxUserStore', () => {
     mockXxxLoadingService.loadingOff.mockClear();
     mockXxxLoadingService.loadingOn.mockClear();
     mockXxxUserData.getUsers.mockClear();
-    mockXxxUserData.getUsers.mockReturnValue(of(mockXxxUserApiResponse));
     spyRouterNavigate.mockClear();
   });
 
