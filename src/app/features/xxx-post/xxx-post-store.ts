@@ -40,7 +40,8 @@ export const XxxPostStore = signalStore(
   // They cannot have a parameter.
   withComputed((store) => ({
       isNoSelectedUser: computed(() => store.selectedUserId === undefined),
-      isPostsLoaded: computed(() => store.posts().length > 0),
+      isPostsEmpty: computed(() => !store.isPostsLoading() && store.posts().length === 0),
+      isPostsLoaded: computed(() => !store.isPostsLoading() && store.posts().length > 0),
       selectedPost: computed(() => {
         let post: XxxPostType | undefined;
         const posts: XxxPostType[] = store.posts();
@@ -76,7 +77,7 @@ export const XxxPostStore = signalStore(
   // if you need to have a computed signal that requires parameters, then you need to use withMethods.
   withMethods(({alertService, loadingService, router, postData, ...store}) => ({
       loadPosts: (): void => {
-        patchState(store, {posts: [], selectedPostId: undefined});
+        patchState(store, {isPostsLoading: true, posts: [], selectedPostId: undefined});
         let isError = false;
         const userId: number | undefined = store.selectedUserId ? store.selectedUserId() : undefined;
         if (userId !== undefined) {
@@ -95,6 +96,7 @@ export const XxxPostStore = signalStore(
               if (!isError) {
                 patchState(store, {posts: response});
               }
+              patchState(store, {isPostsLoading: false});
               loadingService.loadingOff();
             });
         }

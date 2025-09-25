@@ -7,7 +7,9 @@ describe('XxxPostFacade', () => {
   const mockXxxPostStore = {
     isNoSelectedPost: jest.fn(),
     isNoSelectedUser: jest.fn(),
+    isPostsEmpty: jest.fn(),
     isPostsLoaded: jest.fn(),
+    isPostsLoading: jest.fn(),
     isSaveButtonDisabled: jest.fn(),
     posts: jest.fn(),
     selectedPost: jest.fn(),
@@ -41,8 +43,16 @@ describe('XxxPostFacade', () => {
       expect(service.isNoSelectedUser).toBeDefined();
     });
 
+    it('should have isPostsEmpty', () => {
+      expect(service.isPostsEmpty).toBeDefined();
+    });
+
     it('should have isPostsLoaded', () => {
       expect(service.isPostsLoaded).toBeDefined();
+    });
+
+    it('should have isPostsLoading', () => {
+      expect(service.isPostsLoading).toBeDefined();
     });
 
     it('should have isSaveButtonDisabled', () => {
