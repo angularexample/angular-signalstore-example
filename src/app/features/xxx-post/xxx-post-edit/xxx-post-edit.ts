@@ -5,7 +5,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { XxxContentType } from '../../../core/xxx-content/xxx-content-types';
 import { XxxContent } from '../../../core/xxx-content/xxx-content';
 import { XxxContentFacade } from '../../../core/xxx-content/xxx-content-facade';
-import { xxxPostFormDataInitial, XxxPostType } from '../xxx-post-types';
+import { XxxPostType } from '../xxx-post-types';
 import { XxxPostFacade } from '../xxx-post-facade';
 
 @Component({
@@ -20,9 +20,9 @@ import { XxxPostFacade } from '../xxx-post-facade';
 export class XxxPostEdit {
   protected readonly contentKey: string = 'post-edit';
   protected postForm: FormGroup = new FormGroup({
-    body: new FormControl(''),
+    body: new FormControl('', Validators.required),
     id: new FormControl(0),
-    title: new FormControl(''),
+    title: new FormControl('', Validators.required),
     userId: new FormControl(0),
   });
   private contentFacade: XxxContentFacade = inject(XxxContentFacade);
