@@ -1,5 +1,5 @@
 import { Component, Signal } from '@angular/core';
-import { mockPost, mockPost1, mockPosts } from './xxx-post.mocks';
+import { mockPost, mockPost1, mockPost2, mockPosts } from './xxx-post.mocks';
 import { of, throwError } from 'rxjs';
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter, Route, Router } from '@angular/router';
@@ -220,7 +220,7 @@ describe('XxxPostStore', () => {
       store.setSelectedUserId(userId);
       store.loadPosts();
       store.setSelectedPostId(mockPost.id);
-      store.setPostForm(mockPost);
+      store.setPostForm(mockPost1);
       const result = store.isSaveButtonDisabled;
       expect(result()).toBeTruthy();
     });
@@ -229,7 +229,7 @@ describe('XxxPostStore', () => {
       store.setSelectedUserId(userId);
       store.loadPosts();
       store.setSelectedPostId(mockPost.id);
-      store.setPostForm(mockPost1);
+      store.setPostForm(mockPost2);
       const result = store.isSaveButtonDisabled;
       expect(result()).toBeFalsy();
     });
