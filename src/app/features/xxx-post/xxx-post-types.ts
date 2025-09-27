@@ -5,13 +5,6 @@ export interface XxxPostType {
   userId: number;
 }
 
-export const xxxPostFormDataInitial: XxxPostType = {
-  body: '',
-  id: 0,
-  title: '',
-  userId: 0,
-};
-
 // SignalStore withState initial state requires all properties to be defined
 export const xxxPostInitialState: XxxPostState = {
   isPostsLoading: false,

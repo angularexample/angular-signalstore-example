@@ -20,10 +20,10 @@ import { XxxPostFacade } from '../xxx-post-facade';
 export class XxxPostEdit {
   protected readonly contentKey: string = 'post-edit';
   protected postForm: FormGroup = new FormGroup({
-    body: new FormControl(xxxPostFormDataInitial.body, Validators.required),
-    id: new FormControl(xxxPostFormDataInitial.id),
-    title: new FormControl(xxxPostFormDataInitial.title, Validators.required),
-    userId: new FormControl(xxxPostFormDataInitial.userId)
+    body: new FormControl(''),
+    id: new FormControl(0),
+    title: new FormControl(''),
+    userId: new FormControl(0),
   });
   private contentFacade: XxxContentFacade = inject(XxxContentFacade);
   protected readonly content: Signal<XxxContentType | undefined> = this.contentFacade.contentByKey(this.contentKey);
@@ -44,7 +44,13 @@ export class XxxPostEdit {
   private loadFormData(): void {
     const post: XxxPostType | undefined = this.selectedPost();
     if (post !== undefined) {
-      this.postForm.setValue(post);
+      // Unit test will fail if you use this.postForm.setValue(post);
+      this.postForm.setValue({
+        body: post.body || '',
+        id: post.id || 0,
+        title: post.title || '',
+        userId: post.userId || 0,
+      });
     }
   }
 
