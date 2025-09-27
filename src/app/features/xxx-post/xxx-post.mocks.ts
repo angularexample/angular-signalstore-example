@@ -21,4 +21,11 @@ export const mockPost2: XxxPostType = {
   body: 'mockBody2',
 };
 
+export const mockPost3: XxxPostType = {
+  id: 1,
+  userId: 1,
+  title: 'mockTitle3',
+  body: 'mockBody',
+};
+
 export const mockPosts: XxxPostType[] = [mockPost1, mockPost2];
