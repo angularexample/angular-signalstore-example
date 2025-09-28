@@ -1,8 +1,18 @@
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ContentChild, inject, Input, OnInit, TemplateRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  inject,
+  input,
+  InputSignal,
+  OnInit,
+  Signal,
+  TemplateRef
+} from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { Observable, tap } from 'rxjs';
+import { NgTemplateOutlet } from '@angular/common';
 import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
+import { tap } from 'rxjs';
 import { XxxLoadingService } from './xxx-loading-service';
 
 /**
@@ -29,7 +39,6 @@ import { XxxLoadingService } from './xxx-loading-service';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    AsyncPipe,
     MatProgressSpinner,
     NgTemplateOutlet,
   ],
@@ -39,13 +48,13 @@ import { XxxLoadingService } from './xxx-loading-service';
 })
 export class XxxLoading implements OnInit {
   @ContentChild('loading') customLoadingIndicator: TemplateRef<any> | null = null;
-  @Input() detectRouteTransitions = false;
+  detectRouteTransitions:InputSignal<boolean> = input<boolean>(false);
   private loadingService: XxxLoadingService = inject(XxxLoadingService);
-  protected readonly loading$: Observable<boolean> = this.loadingService.loading$;
+  protected readonly isLoading: Signal<boolean> = this.loadingService.isLoading;
   private router: Router = inject(Router);
 
   ngOnInit(): void {
-    if (this.detectRouteTransitions) {
+    if (this.detectRouteTransitions()) {
       this.router.events
         .pipe(
           tap((event) => {

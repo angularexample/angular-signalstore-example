@@ -1,4 +1,4 @@
-@if (loading$ | async) {
+@if (isLoading()) {
   <div class="xxx-loading-container">
     @if (customLoadingIndicator) {
       <ng-container
