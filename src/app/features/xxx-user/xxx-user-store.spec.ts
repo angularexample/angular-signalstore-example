@@ -94,13 +94,13 @@ describe('XxxUserStore', () => {
   describe('isUsersEmpty', () => {
     it('should be true after initial state', () => {
       const result: Signal<boolean> = store.isUsersEmpty;
-      expect(result()).toBeTruthy();
+      expect(result()).toBe(true);
     });
 
     it('should false after load users', () => {
       store.loadUsers();
       const result: Signal<boolean> = store.isUsersEmpty;
-      expect(result()).toBeFalsy();
+      expect(result()).toBe(false);
     });
   })
 

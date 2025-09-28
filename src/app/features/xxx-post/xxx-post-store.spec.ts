@@ -132,41 +132,41 @@ describe('XxxPostStore', () => {
   describe('isNoSelectedUser', () => {
     it('should be true when there is no selected user id', () => {
       const result = store.isNoSelectedUser
-      expect(result()).toBeTruthy();
+      expect(result()).toBe(true);
     });
 
     it('should be false when there is a selected user id', () => {
       store.setSelectedUserId(userId);
       const result = store.isNoSelectedUser
-      expect(result()).toBeFalsy();
+      expect(result()).toBe(false);
     });
   });
 
   describe('isPostsEmpty', () => {
     it('should be true on initial state', () => {
       const result: Signal<boolean> = store.isPostsEmpty;
-      expect(result()).toBeTruthy();
+      expect(result()).toBe(true);
     });
 
     it('should be false when there are posts', () => {
       store.setSelectedUserId(userId);
       store.loadPosts();
       const result: Signal<boolean> = store.isPostsEmpty;
-      expect(result()).toBeFalsy();
+      expect(result()).toBe(false);
     });
   })
 
   describe('isPostsLoaded', () => {
     it('should be false on initial state', () => {
       const result: Signal<boolean> = store.isPostsLoaded;
-      expect(result()).toBeFalsy();
+      expect(result()).toBe(false);
     });
 
     it('should be true when there are posts', () => {
       store.setSelectedUserId(userId);
       store.loadPosts();
       const result: Signal<boolean> = store.isPostsLoaded;
-      expect(result()).toBeTruthy();
+      expect(result()).toBe(true);
     });
   })
 
@@ -188,14 +188,14 @@ describe('XxxPostStore', () => {
   describe('isNoSelectedPost', () => {
     it('should be true when there is no selected post id', () => {
       const result = store.isNoSelectedPost;
-      expect(result()).toBeTruthy();
+      expect(result()).toBe(true);
     });
 
     it('should be true when posts is empty', () => {
       store.setSelectedUserId(userId);
       store.setSelectedPostId(mockPost.id);
       const result = store.isNoSelectedPost;
-      expect(result()).toBeTruthy();
+      expect(result()).toBe(true);
     });
 
     it('should be true when selected post id does not match any of the posts', () => {
@@ -203,7 +203,7 @@ describe('XxxPostStore', () => {
       store.loadPosts();
       store.setSelectedPostId(0);
       const result = store.isNoSelectedPost;
-      expect(result()).toBeTruthy();
+      expect(result()).toBe(true);
     });
 
     it('should be false when there is a selected post id and it matches a post', () => {
@@ -211,7 +211,7 @@ describe('XxxPostStore', () => {
       store.loadPosts();
       store.setSelectedPostId(mockPost.id);
       const result = store.isNoSelectedPost;
-      expect(result()).toBeFalsy();
+      expect(result()).toBe(false);
     });
   });
 
@@ -222,7 +222,7 @@ describe('XxxPostStore', () => {
       store.setSelectedPostId(mockPost.id);
       store.setPostForm(mockPost1);
       const result = store.isSaveButtonDisabled;
-      expect(result()).toBeTruthy();
+      expect(result()).toBe(true);
     });
 
     it('should be false when there is a selected post and it doe not equal the form post', () => {
@@ -231,7 +231,7 @@ describe('XxxPostStore', () => {
       store.setSelectedPostId(mockPost.id);
       store.setPostForm(mockPost2);
       const result = store.isSaveButtonDisabled;
-      expect(result()).toBeFalsy();
+      expect(result()).toBe(false);
     });
   })
 

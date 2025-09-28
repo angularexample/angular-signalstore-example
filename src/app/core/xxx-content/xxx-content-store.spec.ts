@@ -94,7 +94,7 @@ describe('XxxContentStore', () => {
       mockXxxContentData.getContent.mockReturnValue(of(mockContentApiEmpty));
       service.loadContent(contentKey);
       const result: Signal<boolean> = service.isContentEmpty(contentKey);
-      expect(result()).toBeTruthy();
+      expect(result()).toBe(true);
     });
   });
 
@@ -103,7 +103,7 @@ describe('XxxContentStore', () => {
       mockXxxContentData.getContent.mockReturnValue(throwError(() => new Error('some error')));
       service.loadContent(contentKey);
       const result: Signal<boolean> = service.isContentError(contentKey);
-      expect(result()).toBeTruthy();
+      expect(result()).toBe(true);
     });
   });
 
