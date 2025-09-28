@@ -19,21 +19,20 @@ describe('XxxLoadingService', () => {
     });
   });
 
+
   describe('loadingOff', () => {
     it('should emit false', () => {
-      service.loading$.subscribe(value => {
-        expect(value).toBe(false);
-      })
       service.loadingOff();
+      const result: boolean = service.isLoading();
+      expect(result).toBe(false);
     });
   });
 
   describe('loadingOn', () => {
     it('should emit true', () => {
-      service.loading$.subscribe(value => {
-        expect(value).toBe(true);
-      });
       service.loadingOn();
+      const result: boolean = service.isLoading();
+      expect(result).toBe(true);
     });
   });
 });
