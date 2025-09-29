@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, Signal } from '@angular/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -27,6 +27,7 @@ export class XxxPostEdit {
   });
   private contentFacade: XxxContentFacade = inject(XxxContentFacade);
   protected readonly content: Signal<XxxContentType | undefined> = this.contentFacade.contentByKey(this.contentKey);
+  private destroyRef = inject(DestroyRef);
   private postFacade: XxxPostFacade = inject(XxxPostFacade);
   protected readonly isNoSelectedPost: Signal<boolean> = this.postFacade.isNoSelectedPost;
   protected readonly isSaveButtonDisabled: Signal<boolean> = this.postFacade.isSaveButtonDisabled;
@@ -58,7 +59,7 @@ export class XxxPostEdit {
     this.postForm.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      takeUntilDestroyed(),
+      takeUntilDestroyed(this.destroyRef),
     ).subscribe(value => {
       const post: XxxPostType = <XxxPostType>value;
       this.postFacade.setPostForm(post);
