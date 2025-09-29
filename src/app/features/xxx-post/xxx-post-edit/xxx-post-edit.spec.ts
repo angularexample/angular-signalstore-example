@@ -58,14 +58,11 @@ describe('XxxPostEdit', () => {
   });
 
   afterEach(() => {
+    jest.useRealTimers();
     jest.clearAllMocks();
   })
 
   describe('construction', () => {
-    it('should create the component', () => {
-      expect(component).toBeDefined();
-    });
-
     it('should create the component', () => {
       expect(component).toBeDefined();
     });
