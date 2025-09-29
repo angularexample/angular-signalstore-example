@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
+  DestroyRef,
   inject,
   input,
   InputSignal,
@@ -12,7 +13,7 @@ import {
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { NgTemplateOutlet } from '@angular/common';
 import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { XxxLoadingService } from './xxx-loading-service';
 
 /**
@@ -48,7 +49,8 @@ import { XxxLoadingService } from './xxx-loading-service';
 })
 export class XxxLoading implements OnInit {
   @ContentChild('loading') customLoadingIndicator: TemplateRef<any> | null = null;
-  detectRouteTransitions:InputSignal<boolean> = input<boolean>(false);
+  private destroyRef = inject(DestroyRef);
+  detectRouteTransitions: InputSignal<boolean> = input<boolean>(false);
   private loadingService: XxxLoadingService = inject(XxxLoadingService);
   protected readonly isLoading: Signal<boolean> = this.loadingService.isLoading;
   private router: Router = inject(Router);
@@ -57,15 +59,16 @@ export class XxxLoading implements OnInit {
     if (this.detectRouteTransitions()) {
       this.router.events
         .pipe(
-          tap((event) => {
+          takeUntilDestroyed(this.destroyRef)
+        ).subscribe(
+          (event) => {
             if (event instanceof RouteConfigLoadStart) {
               this.loadingService.loadingOn();
             } else if (event instanceof RouteConfigLoadEnd) {
               this.loadingService.loadingOff();
             }
-          })
-        )
-        .subscribe();
+          }
+        );
     }
   }
 }
