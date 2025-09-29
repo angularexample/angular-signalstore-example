@@ -21,6 +21,16 @@ Example of using SignalStore with Angular.
   - [What are Angular Signals?](#what-are-angular-signals)
     - [Why is Angular Now Using Signals?](#why-is-angular-now-using-signals)
   - [What is Angular SignalStore?](#what-is-angular-signalstore)
+  - [Replace Jasmin with Jest](#replace-jasmin-with-jest)
+    - [Remove Karma and Jasmine](#remove-karma-and-jasmine)
+    - [Add Jest](#add-jest)
+    - [Add Jest Configuration](#add-jest-configuration)
+      - [Create jest.config.js File](#create-jestconfigjs-file)
+      - [Create setup-jest.ts File](#create-setup-jestts-file)
+      - [Update test Section in angular.json](#update-test-section-in-angularjson)
+      - [Add esModuleInterop to tsconfig.json](#add-esmoduleinterop-to-tsconfigjson)
+      - [Update tsconfig.spec.json](#update-tsconfigspecjson)
+      - [Update scripts in package.json](#update-scripts-in-packagejson)
 
 ## To Run This App
 
