@@ -128,6 +128,12 @@ export const XxxPostStore = signalStore(
             })
           ).subscribe((postResponse: XxxPostType | {}) => {
             if (!isError && Object.keys(postResponse).length > 0) {
+              // remove the old post, add the new one, sort by id
+              let posts = store.posts().filter(item => item.id !== post.id);
+              const updatedPost: XxxPostType = {...post};
+              posts.push(updatedPost);
+              posts.sort((a: XxxPostType, b: XxxPostType) => a.id - b.id);
+              patchState(store,{posts});
               alertService.showInfo('Successfully updated post:  ' + post.id);
               void router.navigateByUrl('/post')
             }
