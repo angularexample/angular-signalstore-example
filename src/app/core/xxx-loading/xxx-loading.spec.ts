@@ -58,11 +58,14 @@ describe('XxxLoading', () => {
         {provide: Router, useValue: mockRouter}
       ]
     }).compileComponents();
+  });
+
+  function createComponent() {
     hostFixture = TestBed.createComponent(HostComponent);
     hostComponent = hostFixture.componentInstance;
     // Get the instance of the component under test as a child of the host component.
     component = hostFixture.debugElement.children[0].componentInstance;
-  });
+  }
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -70,6 +73,7 @@ describe('XxxLoading', () => {
 
   describe('construction', () => {
     it('should create the component', () => {
+      createComponent();
       expect(component).toBeDefined();
     });
   });
@@ -77,6 +81,7 @@ describe('XxxLoading', () => {
   // Input is evaluated on init so async and await are needed.
   describe('detectRouteTransitions', () => {
     it('should call loadingOn when input is true and RouteConfigLoadStart event', async () => {
+      createComponent();
       hostComponent.detectRouteTransitions = true;
       await hostFixture.whenStable();
       routerEventsSubject.next(new RouteConfigLoadStart(mockRoute));
@@ -85,6 +90,7 @@ describe('XxxLoading', () => {
     });
 
     it('should call loadingOff when input is true and RouteConfigLoadEnd event', async () => {
+      createComponent();
       hostComponent.detectRouteTransitions = true;
       await hostFixture.whenStable();
       routerEventsSubject.next(new RouteConfigLoadEnd(mockRoute));
@@ -92,7 +98,8 @@ describe('XxxLoading', () => {
       expect(mockXxxLoadingService.loadingOff).toHaveBeenCalled();
     });
 
-    it('should call not loadingOn or loadingOff when input is false and RouteConfigLoadStart event', async () => {
+    it('should not call loadingOn or loadingOff when input is false and RouteConfigLoadStart event', async () => {
+      createComponent();
       hostComponent.detectRouteTransitions = false;
       await hostFixture.whenStable();
       routerEventsSubject.next(new RouteConfigLoadStart(mockRoute));
@@ -100,12 +107,36 @@ describe('XxxLoading', () => {
       expect(mockXxxLoadingService.loadingOff).not.toHaveBeenCalled();
     });
 
-    it('should call not loadingOn or loadingOff when input is false and RouteConfigLoadEnd event', async () => {
+    it('should not call loadingOn or loadingOff when input is false and RouteConfigLoadEnd event', async () => {
+      createComponent();
       hostComponent.detectRouteTransitions = false;
       await hostFixture.whenStable();
       routerEventsSubject.next(new RouteConfigLoadEnd(mockRoute));
       expect(mockXxxLoadingService.loadingOn).not.toHaveBeenCalled();
       expect(mockXxxLoadingService.loadingOff).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('customLoadingIndicator', () => {
+    it('should customLoadingIndicator be undefined when it does not exist in the host template', () => {
+      createComponent();
+      expect(component.customLoadingIndicator()).toBeUndefined();
+    });
+
+    it('should loadingIndicator be defined when it exists in the host template', () => {
+      TestBed.overrideComponent(HostComponent, {
+        set: {
+          template: '<xxx-loading>\n' +
+            '  <ng-template #customLoadingIndicator>\n' +
+            '    <div>\n' +
+            '      My Loading Indicator...\n' +
+            '    </div>\n' +
+            '  </ng-template>\n' +
+            '</xxx-loading>\n',
+        },
+      });
+      createComponent();
+      expect(component.customLoadingIndicator()).toBeDefined();
     });
   });
 });
