@@ -63,7 +63,7 @@ September 17, 2025
 
 At the time of this writing, we used the latest version of Angular and NgRX Signals.
 
-* Angular 20.2.2
+* Angular 20.3.3
 * @ngrx/signals 20.0.1
 
 This application uses:
