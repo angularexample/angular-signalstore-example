@@ -13,24 +13,26 @@ Example of using SignalStore with Angular.
 - [Date Published](#date-published)
 - [Versions Used](#versions-used)
 - [About The Author](#about-the-author)
+- [What is State Management?](#what-is-state-management)
 - [Compare Three Ways to Manage State in Angular](#compare-three-ways-to-manage-state-in-angular)
   - [The SignalStore Version is the Smallest](#the-signalstore-version-is-the-smallest)
-- [About SignalStore](#about-signalstore)
-  - [What is State Management?](#what-is-state-management)
-    - [Smaller Components](#smaller-components)
-  - [What are Angular Signals?](#what-are-angular-signals)
-    - [Why is Angular Now Using Signals?](#why-is-angular-now-using-signals)
-  - [What is Angular SignalStore?](#what-is-angular-signalstore)
-  - [Replace Jasmin with Jest](#replace-jasmin-with-jest)
-    - [Remove Karma and Jasmine](#remove-karma-and-jasmine)
-    - [Add Jest](#add-jest)
-    - [Add Jest Configuration](#add-jest-configuration)
-      - [Create jest.config.js File](#create-jestconfigjs-file)
-      - [Create setup-jest.ts File](#create-setup-jestts-file)
-      - [Update test Section in angular.json](#update-test-section-in-angularjson)
-      - [Add esModuleInterop to tsconfig.json](#add-esmoduleinterop-to-tsconfigjson)
-      - [Update tsconfig.spec.json](#update-tsconfigspecjson)
-      - [Update scripts in package.json](#update-scripts-in-packagejson)
+- [What is SignalStore?](#what-is-signalstore)
+  - [Smaller Components](#smaller-components)
+- [What are Angular Signals?](#what-are-angular-signals)
+  - [Why is Angular Now Using Signals?](#why-is-angular-now-using-signals)
+- [Prerequisites](#prerequisites)
+- [Create a New Angular Project](#create-a-new-angular-project)
+- [Install NgRx SignalStore](#install-ngrx-signalstore)
+- [Install Angular Material](#install-angular-material)
+- [Replace Jasmin with Jest](#replace-jasmin-with-jest)
+  - [Remove Karma and Jasmine](#remove-karma-and-jasmine)
+  - [Add Jest](#add-jest)
+  - [Create jest.config.js File](#create-jestconfigjs-file)
+  - [Create setup-jest.ts File](#create-setup-jestts-file)
+  - [Update test Section in angular.json](#update-test-section-in-angularjson)
+  - [Add esModuleInterop to tsconfig.json](#add-esmoduleinterop-to-tsconfigjson)
+  - [Update tsconfig.spec.json](#update-tsconfigspecjson)
+  - [Update scripts in package.json](#update-scripts-in-packagejson)
 
 ## To Run This App
 
@@ -86,6 +88,12 @@ JC may be available to work remotely and can be contacted at these links:
 * LinkedIn: [https://linkedin.com/in/jclango](https://linkedin.com/in/jclango)
 * Email: [jobs@jclango.com](mailto:jobs@jclango.com)
 
+## What is State Management?
+
+State management, in simple terms, is a way to store application data and logic in a centralized service.
+
+The goal of state management is to make your view components much smaller, more reusable, and easier to develop and test.
+
 ## Compare Three Ways to Manage State in Angular
 
 I have written three versions of this same example application. This makes it easy to compare the differences between the three versions.
@@ -110,17 +118,18 @@ It has the least amount of code.
 
 It is probably the easiest to understand.
 
-## About SignalStore
+## What is SignalStore?
 
-SignalStore is a library from the makers of NgRx that uses Angular Signals for state management.
+Angular SignalStore is a library that uses Angular Signals to manage state.
 
-### What is State Management?
+It is a package developed by the makers of NgRx.
 
-State management, in simple terms, is a way to store application data and logic in a centralized service.
+All the state management logic and data are contained in the SignalStore class.
 
-The goal of state management is to make your view components much smaller, more reusable, and easier to develop and test. 
+For more information, see the [NgRx SignalStore documentation](https://ngrx.io/guide/signals/signal-store).
 
-#### Smaller Components
+
+### Smaller Components
 
 Without state management, a typical component does everything from fetching data to displaying it to the user.
 It will usually have a lot of logic and a lot of code to get and manipulate data.
@@ -132,7 +141,7 @@ You are left with a view component that only has to display the data.
 
 View components are much smaller, easier to test, and easier to reuse.
 
-### What are Angular Signals?
+## What are Angular Signals?
 
 Angular Signals is a newer technology introduced with Angular 17.
 
@@ -140,7 +149,7 @@ A signal is data that will be sent to a component. It is similar to a Promise or
 
 For more information, see the [Angular Signals documentation](https://angular.dev/guide/signals).
 
-#### Why is Angular Now Using Signals?
+### Why is Angular Now Using Signals?
 
 You will see that Angular is now using Signals as a big part of all of its new releases.
 
@@ -149,22 +158,78 @@ One reason is that Signals help to increase performance.
 Signals can make your application more responsive.
 The view component will only update smaller portions when the data it needs has changed.
 
-### What is Angular SignalStore?
+For more information, see the official documentation:
 
-Angular SignalStore is a library that uses Angular Signals to manage state.
+* [Angular Signals](https://angular.io/guide/signals)
+* [NgRx Signals](https://ngrx.io/guide/signals)
 
-It is a package developed by the makers of NgRx.
+## Prerequisites
 
-All the state management logic and data are contained in the SignalStore class.
+You will need the following installed on your computer:
 
-For more information, see the [NgRx SignalStore documentation](https://ngrx.io/guide/signals/signal-store).
+* [Node.js](https://nodejs.org/en/)
+* [Angular CLI](https://cli.angular.io/)
+* [Git](https://git-scm.com/downloads)
+
+## Create a New Angular Project
+
+Open a terminal window, go to the parent directory of where you want to create the new project directory, and run the following command:
+
+```
+ ng new angular-ngrx-signalstore
+```
+
+In this case we are creating the project in the `angular-ngrx-signalstore` directory.
+
+When prompted, select the following options:
+
+```
+? Which stylesheet format would you like to use?
+Sass (SCSS)
+
+? Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering)? (y/N) 
+N
+
+? Do you want to create a 'zoneless' application without zone.js (Developer Preview)? (y/N) 
+y
+```
+
+## Install NgRx SignalStore
+
+Install the NgRx Signals package, which also provides the SignalStore.
+
+```
+ng add @ngrx/signals@latest
+```
+
+For more information, see the [NgRx Signals Install documentation](https://ngrx.io/guide/signals/install).
+
+## Install Angular Material
+
+The example application uses Angular Material for the UI.
+
+Install Angular Material:
+
+```
+ng add @angular/material
+```
 
 
 ## Replace Jasmin with Jest
 
 ### Remove Karma and Jasmine
 
-Remove the Karma and Jasmine packages from the package.json file.
+Remove all the Jasmine and Karma packages from `package.json`.
+
+```
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.9.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+```
 
 ### Add Jest
 
@@ -174,11 +239,9 @@ Add the Jest packages to the package.json file.
     npm install --save-dev jest @types/jest jest-preset-angular jest-environment-jsdom
 ```
 
-### Add Jest Configuration
+### Create jest.config.js File
 
-#### Create jest.config.js File
-
-Create a jest.config.js file in the root of the project.
+Create a `jest.config.js` file in the root of the project.
 
 ```javascript
 module.exports = {
@@ -194,9 +257,9 @@ module.exports = {
 };
 ```
 
-#### Create setup-jest.ts File
+### Create setup-jest.ts File
 
-Create a setup-jest.ts file in the root of the project.
+Create a `setup-jest.ts` file in the root of the project.
 
 If not using Zone.js, add the following to the setup-jest.ts file.
 ```javascript
@@ -212,7 +275,7 @@ import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
 setupZoneTestEnv();
 ```
 
-#### Update test Section in angular.json
+### Update test Section in angular.json
 
 Update the test section in the angular.json file.
 
@@ -225,7 +288,7 @@ Update the test section in the angular.json file.
 }
 ```
 
-#### Add esModuleInterop to tsconfig.json
+### Add esModuleInterop to tsconfig.json
 
 Add the following to the `tsconfig.json` file under the `compilerOptions` section.
 
@@ -233,25 +296,18 @@ Add the following to the `tsconfig.json` file under the `compilerOptions` sectio
 "esModuleInterop": true,
 ```
 
-#### Update tsconfig.spec.json
+### Update tsconfig.spec.json
 
-In the `tsconfig.spec.json` file, add the following to the `compilerOptions` section.
+In the `tsconfig.spec.json` file, update the `compilerOptions` section as follows:
 
 ```
-{
-  "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
-    "types": ["jest", "node"]
+    "types": ["jest"]
   },
-  "include": [
-    "src/**/*.spec.ts",
-    "src/**/*.d.ts"
-  ]
-}
 ```
 
-#### Update scripts in package.json
+### Update scripts in package.json
 
 In the `scripts` section of the `package.json` file, change the `test` property to `jest`.
 
