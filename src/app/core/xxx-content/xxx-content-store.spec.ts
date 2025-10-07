@@ -9,7 +9,7 @@ import { XxxContentStore } from './xxx-content-store';
 import { XxxContentType } from './xxx-content-types';
 
 describe('XxxContentStore', () => {
-  let service;
+  let service: any;
   let contentKey: string;
 
   const mockXxxContentData = {
@@ -22,23 +22,24 @@ describe('XxxContentStore', () => {
     showWarning: jest.fn(),
   }
 
-  TestBed.configureTestingModule({
-    providers: [
-      provideHttpClient(),
-      {provide: XxxAlert, useValue: mockXxxAlert},
-      {provide: XxxContentData, useValue: mockXxxContentData},
-      XxxContentStore
-    ],
-  });
-
-  service = TestBed.inject(XxxContentStore);
-
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        provideHttpClient(),
+        {provide: XxxAlert, useValue: mockXxxAlert},
+        {provide: XxxContentData, useValue: mockXxxContentData},
+        XxxContentStore
+      ],
+    });
+    service = TestBed.inject(XxxContentStore);
     contentKey = 'home';
-    mockXxxAlert.showError.mockClear();
-    mockXxxContentData.getContent.mockClear();
     mockXxxContentData.getContent.mockReturnValue(of(mockContentApiHome));
   });
+
+  afterEach(() => {
+    mockXxxAlert.showError.mockClear();
+    mockXxxContentData.getContent.mockClear();
+  })
 
   describe('constructor phase', () => {
     it('should be created', () => {
