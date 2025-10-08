@@ -15,8 +15,8 @@ describe('XxxPostFacade', () => {
     selectedPost: jest.fn(),
     selectedPostId: jest.fn(),
     selectedUserId: jest.fn(),
-    setSelectedPostId: jest.fn(),
     setPostForm: jest.fn(),
+    setSelectedPostId: jest.fn(),
     showPosts: jest.fn(),
     updatePost: jest.fn(),
   };
