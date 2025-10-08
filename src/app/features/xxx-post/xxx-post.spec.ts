@@ -4,8 +4,8 @@ import { mockPost, mockPosts } from './xxx-post.mocks';
 import { XxxContent } from '../../core/xxx-content/xxx-content';
 import { XxxContentFacade } from '../../core/xxx-content/xxx-content-facade';
 import { XxxPost } from './xxx-post';
-import { XxxPostType } from './xxx-post-types';
 import { XxxPostFacade } from './xxx-post-facade';
+import { XxxPostType } from './xxx-post-types';
 
 // Use extended class to test protected method.
 @Component({
