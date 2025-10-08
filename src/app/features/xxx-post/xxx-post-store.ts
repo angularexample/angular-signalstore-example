@@ -75,7 +75,7 @@ export const XxxPostStore = signalStore(
   // If you need to run a method that requires parameters, then you need to use withMethods.
   // if you need to have a computed signal that requires parameters, then you need to use withMethods.
   withMethods(({alertService, loadingService, router, postData, ...store}) => ({
-      loadPosts: (): void => {
+      getPosts: (): void => {
         patchState(store, {isPostsLoading: true, posts: [], selectedPostId: undefined});
         let isError = false;
         const userId: number | undefined = store.selectedUserId ? store.selectedUserId() : undefined;
@@ -161,7 +161,7 @@ export const XxxPostStore = signalStore(
             store.setSelectedUserId(userSelectedUserId);
           }
           if (store.isPostsEmpty()) {
-            store.loadPosts()
+            store.getPosts()
           }
         }
       }
