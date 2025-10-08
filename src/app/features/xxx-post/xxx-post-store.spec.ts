@@ -104,12 +104,28 @@ describe('XxxPostStore', () => {
       expect(store.isSaveButtonDisabled).toBeDefined();
     });
 
+    it('should have loadPosts', () => {
+      expect(store.loadPosts).toBeDefined();
+    });
+
+    it('should have posts', () => {
+      expect(store.posts).toBeDefined();
+    });
+
+    it('should have postForm', () => {
+      expect(store.postForm).toBeDefined();
+    });
+
     it('should have selectedPost', () => {
       expect(store.selectedPost).toBeDefined();
     });
 
-    it('should have loadPosts', () => {
-      expect(store.loadPosts).toBeDefined();
+    it('should have selectedPostId', () => {
+      expect(store.selectedPostId).toBeDefined();
+    });
+
+    it('should have selectedUserId', () => {
+      expect(store.selectedUserId).toBeDefined();
     });
 
     it('should have setPostForm', () => {
@@ -124,12 +140,12 @@ describe('XxxPostStore', () => {
       expect(store.setSelectedUserId).toBeDefined();
     });
 
-    it('should have updatePost', () => {
-      expect(store.updatePost).toBeDefined();
-    });
-
     it('should have showPosts', () => {
       expect(store.showPosts).toBeDefined();
+    });
+
+    it('should have updatePost', () => {
+      expect(store.updatePost).toBeDefined();
     });
   })
 
