@@ -13,7 +13,7 @@ describe('XxxUserFacade', () => {
     showUsers: jest.fn(),
     users: jest.fn(),
   };
-  let store: XxxUserFacade;
+  let service: XxxUserFacade;
 
   TestBed.configureTestingModule({
     providers: [
@@ -22,43 +22,43 @@ describe('XxxUserFacade', () => {
     ],
   });
 
-  store = TestBed.inject(XxxUserFacade);
+  service = TestBed.inject(XxxUserFacade);
   describe('constructor phase', () => {
     it('should be created', () => {
-      expect(store).toBeDefined();
+      expect(service).toBeDefined();
     });
 
     it('should have isUsersEmpty', () => {
-      expect(store.isUsersEmpty).toBeDefined();
+      expect(service.isUsersEmpty).toBeDefined();
     });
 
     it('should have isUsersLoaded', () => {
-      expect(store.isUsersLoaded).toBeDefined();
+      expect(service.isUsersLoaded).toBeDefined();
     });
 
     it('should have isUsersLoading', () => {
-      expect(store.isUsersLoading).toBeDefined();
+      expect(service.isUsersLoading).toBeDefined();
     });
 
     it('should have selectedUserId', () => {
-      expect(store.selectedUserId).toBeDefined();
+      expect(service.selectedUserId).toBeDefined();
     });
 
     it('should have users', () => {
-      expect(store.users).toBeDefined();
+      expect(service.users).toBeDefined();
     });
   })
 
   describe('showUsers', () => {
     it('should call userStore.showUsers', () => {
-      store.showUsers();
+      service.showUsers();
       expect(mockXxxUserStore.showUsers).toHaveBeenCalled();
     });
   });
 
   describe('setSelectedUserId', () => {
     it('should should call userStore.setSelectedUserId', () => {
-      store.setSelectedUserId(mockUserId);
+      service.setSelectedUserId(mockUserId);
       expect(mockXxxUserStore.setSelectedUserId).toHaveBeenCalledWith(mockUserId);
     });
   });
