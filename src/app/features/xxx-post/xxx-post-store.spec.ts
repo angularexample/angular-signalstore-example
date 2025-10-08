@@ -8,8 +8,8 @@ import { XxxAlert } from '../../core/xxx-alert/xxx-alert';
 import { XxxLoadingService } from '../../core/xxx-loading/xxx-loading-service';
 import { XxxPostData } from './xxx-post-data';
 import { XxxPostStore } from './xxx-post-store';
-import { XxxUserFacade } from '../xxx-user/xxx-user-facade';
 import { XxxPostType } from './xxx-post-types';
+import { XxxUserFacade } from '../xxx-user/xxx-user-facade';
 
 @Component({
   selector: 'xxx-dummy',
@@ -80,6 +80,10 @@ describe('XxxPostStore', () => {
       expect(store).toBeDefined();
     });
 
+    it('should have getPosts', () => {
+      expect(store.getPosts).toBeDefined();
+    });
+
     it('should have isNoSelectedPost', () => {
       expect(store.isNoSelectedPost).toBeDefined();
     });
@@ -102,10 +106,6 @@ describe('XxxPostStore', () => {
 
     it('should have isSaveButtonDisabled', () => {
       expect(store.isSaveButtonDisabled).toBeDefined();
-    });
-
-    it('should have loadPosts', () => {
-      expect(store.loadPosts).toBeDefined();
     });
 
     it('should have posts', () => {
@@ -170,7 +170,7 @@ describe('XxxPostStore', () => {
 
     it('should be false when there are posts', () => {
       store.setSelectedUserId(userId);
-      store.loadPosts();
+      store.getPosts();
       const result: Signal<boolean> = store.isPostsEmpty;
       expect(result()).toBe(false);
     });
@@ -184,7 +184,7 @@ describe('XxxPostStore', () => {
 
     it('should be true when there are posts', () => {
       store.setSelectedUserId(userId);
-      store.loadPosts();
+      store.getPosts();
       const result: Signal<boolean> = store.isPostsLoaded;
       expect(result()).toBe(true);
     });
@@ -198,7 +198,7 @@ describe('XxxPostStore', () => {
 
     it('should be true when there are posts', () => {
       store.setSelectedUserId(userId);
-      store.loadPosts();
+      store.getPosts();
       store.setSelectedPostId(mockPost.id);
       const result: Signal<XxxPostType | undefined> = store.selectedPost;
       expect(result()).toEqual(mockPost);
@@ -220,7 +220,7 @@ describe('XxxPostStore', () => {
 
     it('should be true when selected post id does not match any of the posts', () => {
       store.setSelectedUserId(userId);
-      store.loadPosts();
+      store.getPosts();
       store.setSelectedPostId(0);
       const result = store.isNoSelectedPost;
       expect(result()).toBe(true);
@@ -228,7 +228,7 @@ describe('XxxPostStore', () => {
 
     it('should be false when there is a selected post id and it matches a post', () => {
       store.setSelectedUserId(userId);
-      store.loadPosts();
+      store.getPosts();
       store.setSelectedPostId(mockPost.id);
       const result = store.isNoSelectedPost;
       expect(result()).toBe(false);
@@ -238,7 +238,7 @@ describe('XxxPostStore', () => {
   describe('isSaveButtonDisabled and setPostForm', () => {
     it('should be true when there is selected post and it equals the form post', () => {
       store.setSelectedUserId(userId);
-      store.loadPosts();
+      store.getPosts();
       store.setSelectedPostId(mockPost.id);
       store.setPostForm(mockPost1);
       const result = store.isSaveButtonDisabled;
@@ -247,7 +247,7 @@ describe('XxxPostStore', () => {
 
     it('should be false when there is a selected post and it doe not equal the form post', () => {
       store.setSelectedUserId(userId);
-      store.loadPosts();
+      store.getPosts();
       store.setSelectedPostId(mockPost.id);
       store.setPostForm(mockPost2);
       const result = store.isSaveButtonDisabled;
@@ -258,13 +258,13 @@ describe('XxxPostStore', () => {
   describe('loadPosts', () => {
     it('should run XxxPostData.getPosts', () => {
       store.setSelectedUserId(userId);
-      store.loadPosts();
+      store.getPosts();
       expect(mockXxxPostData.getPosts).toHaveBeenCalled();
     });
 
     it('should run XxxLoadingService.loadingOn and loadingOff', () => {
       store.setSelectedUserId(userId);
-      store.loadPosts();
+      store.getPosts();
       expect(mockXxxLoadingService.loadingOn).toHaveBeenCalled();
       expect(mockXxxLoadingService.loadingOff).toHaveBeenCalled();
     });
@@ -273,7 +273,7 @@ describe('XxxPostStore', () => {
       const errorMessage: string = `Error. Unable to get posts for user ${userId}`;
       mockXxxPostData.getPosts.mockReturnValue(throwError(() => new Error('some error')));
       store.setSelectedUserId(userId);
-      store.loadPosts();
+      store.getPosts();
       expect(mockXxxAlert.showError).toHaveBeenCalledWith(errorMessage);
     });
   })
@@ -357,7 +357,7 @@ describe('XxxPostStore', () => {
 
     it('should not call loadPosts when posts is not empty', () => {
       store.setSelectedUserId(userId);
-      store.loadPosts();
+      store.getPosts();
       mockXxxPostData.getPosts.mockClear();
       store.showPosts();
       expect(mockXxxPostData.getPosts).not.toHaveBeenCalled();
