@@ -100,12 +100,12 @@ describe('XxxPostStore', () => {
       expect(store.isPostsLoading).toBeDefined();
     });
 
-    it('should have selectedPost', () => {
-      expect(store.selectedPost).toBeDefined();
-    });
-
     it('should have isSaveButtonDisabled', () => {
       expect(store.isSaveButtonDisabled).toBeDefined();
+    });
+
+    it('should have selectedPost', () => {
+      expect(store.selectedPost).toBeDefined();
     });
 
     it('should have loadPosts', () => {
@@ -118,6 +118,10 @@ describe('XxxPostStore', () => {
 
     it('should have setSelectedPostId', () => {
       expect(store.setSelectedPostId).toBeDefined();
+    });
+
+    it('should have setSelectedUserId', () => {
+      expect(store.setSelectedUserId).toBeDefined();
     });
 
     it('should have updatePost', () => {
