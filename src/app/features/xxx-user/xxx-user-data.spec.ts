@@ -3,8 +3,8 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { mockXxxUserApiResponse } from './xxx-user.mocks';
 import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { XxxUserData } from './xxx-user-data';
 import { XxxUserApiResponse } from './xxx-user-types';
+import { XxxUserData } from './xxx-user-data';
 
 describe('XxxUserData', () => {
   let service: XxxUserData;
