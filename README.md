@@ -391,3 +391,17 @@ Jiti is required for Node.js <24.3.0 to read TypeScript configuration files.
 ```
 Check your version of Node.js. If it is less than 24.3.0, select `Yes`.
 
+### Configure ESLint in Your IDE
+
+For IntelliJ IDEA, see docs to automatically run ESLint on save.
+
+https://www.jetbrains.com/help/idea/eslint.html#ws_js_eslint_automatic_configuration
+
+
+### Install Jiti
+
+Install Jiti with this command:
+
+```
+npm i jiti
+```
