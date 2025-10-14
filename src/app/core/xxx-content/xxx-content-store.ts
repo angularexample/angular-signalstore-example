@@ -63,7 +63,7 @@ export const XxxContentStore = signalStore(
               return of({});
             })
           )
-          .subscribe((response: XxxContentApi | {}) => {
+          .subscribe((response: XxxContentApi | object) => {
             // remove any existing content
             theContents = store.contents().filter((item: XxxContentType) => item.key !== key);
             // create a new content item

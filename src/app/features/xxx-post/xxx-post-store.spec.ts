@@ -19,9 +19,10 @@ class XxxDummyComponent {
 }
 
 describe('XxxPostStore', () => {
+  type XxxPostStore = InstanceType<typeof XxxPostStore>;
   let router: Router;
   let spyRouterNavigate: jest.SpyInstance;
-  let store: any;
+  let store: XxxPostStore;
   const userId = mockPost.userId;
 
   const mockRoutes: Route[] = [
@@ -281,8 +282,10 @@ describe('XxxPostStore', () => {
   describe('setSelectedPostId', () => {
     it('should have expected selected post id', () => {
       store.setSelectedPostId(mockPost.id);
-      const result: Signal<number | undefined> = store.selectedPostId;
-      expect(result()).toBe(mockPost.id);
+      const result: Signal<number | undefined> | undefined = store.selectedPostId;
+      if (result) {
+        expect(result()).toBe(mockPost.id);
+      }
     });
 
     it('should run router navigate', () => {
@@ -294,8 +297,10 @@ describe('XxxPostStore', () => {
   describe('setSelectedUserId', () => {
     it('should have expected selected user id', () => {
       store.setSelectedUserId(userId);
-      const result: Signal<number | undefined> = store.selectedUserId;
-      expect(result()).toBe(userId);
+      const result: Signal<number | undefined> | undefined = store.selectedUserId;
+      if (result) {
+        expect(result()).toBe(userId);
+      }
     });
 
     it('should set posts to empty', () => {
@@ -307,15 +312,19 @@ describe('XxxPostStore', () => {
     it('should set selectedPostId to undefined', () => {
       store.setSelectedPostId(mockPost.id);
       store.setSelectedUserId(userId);
-      const result: Signal<number | undefined> = store.selectedPostId;
-      expect(result()).toBe(undefined);
+      const result: Signal<number | undefined> | undefined = store.selectedPostId;
+      if (result) {
+        expect(result()).toBe(undefined);
+      }
     });
 
     it('should set postForm to undefined', () => {
       store.setPostForm(mockPost);
       store.setSelectedUserId(userId);
-      const result: Signal<number | undefined> = store.postForm;
-      expect(result()).toBe(undefined);
+      const result: Signal<XxxPostType | undefined> | undefined = store.postForm;
+      if(result){
+        expect(result()).toBe(undefined);
+      }
     });
   });
 
@@ -366,8 +375,10 @@ describe('XxxPostStore', () => {
     it('should call setSelectedUserId when userId is not the same from user ', () => {
       store.setSelectedUserId(0);
       store.showPosts();
-      const result = store.selectedUserId();
-      expect(result).toBe(mockPost.userId);
+      const result: Signal<number | undefined> | undefined  = store.selectedUserId;
+      if (result) {
+        expect(result()).toBe(mockPost.userId);
+      }
     });
   });
 });

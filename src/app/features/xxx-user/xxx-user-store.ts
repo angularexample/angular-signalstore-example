@@ -59,7 +59,7 @@ export const XxxUserStore = signalStore(
               return of({});
             })
           )
-          .subscribe((response: XxxUserApiResponse | {}) => {
+          .subscribe((response: XxxUserApiResponse | object) => {
             if (!isError) {
               const data: XxxUserApiResponse = response as XxxUserApiResponse;
               const theUsers: XxxUserType[] = data.users;

@@ -9,7 +9,8 @@ import { XxxContentStore } from './xxx-content-store';
 import { XxxContentType } from './xxx-content-types';
 
 describe('XxxContentStore', () => {
-  let service: any;
+  type XxxContentStore = InstanceType<typeof XxxContentStore>;
+  let service: XxxContentStore;
   let contentKey: string;
 
   const mockXxxContentData = {
