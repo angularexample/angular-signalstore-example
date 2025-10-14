@@ -109,7 +109,7 @@ The goal of state management is to make your view components much smaller, more 
 I have written three versions of this same example application. This makes it easy to compare the differences between the three versions.
 
 - [Angular NgRx Example](https://github.com/angularexample/angular18-ngrx-standalone)
-- [Angular Pure Signals Example](https://github.com/angularexample/angular20-signal-state)
+- [Angular Signals State Management](https://github.com/angularexample/angular-signals-state-management)
 - [Angular SignalStore Example](https://github.com/angularexample/angular-signalstore-example)
 
 All three versions of this example application have identical user experience.
