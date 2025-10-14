@@ -33,6 +33,16 @@ Example of using SignalStore with Angular.
   - [Add esModuleInterop to tsconfig.json](#add-esmoduleinterop-to-tsconfigjson)
   - [Update tsconfig.spec.json](#update-tsconfigspecjson)
   - [Update scripts in package.json](#update-scripts-in-packagejson)
+- [Install ESLint and Prettier](#install-eslint-and-prettier)
+  - [The Difference Between ESLint and Prettier](#the-difference-between-eslint-and-prettier)
+  - [Remove .editorconfig](#remove-editorconfig)
+  - [Install ESLint](#install-eslint)
+  - [Configure ESLint in Your IDE](#configure-eslint-in-your-ide)
+  - [Install Prettier](#install-prettier)
+  - [Create Prettier Config File](#create-prettier-config-file)
+  - [Create .prettierignore File](#create-prettierignore-file)
+  - [Install eslint-config-prettier](#install-eslint-config-prettier)
+  - [Configure Prettier in Your IDE](#configure-prettier-in-your-ide)
 
 ## To Run This App
 
@@ -398,14 +408,6 @@ For IntelliJ IDEA, see docs to automatically run ESLint on save.
 https://www.jetbrains.com/help/idea/eslint.html#ws_js_eslint_automatic_configuration
 
 
-### Install Jiti
-
-Install Jiti with this command:
-
-```
-npm i jiti
-```
-
 ## Install Prettier
 
 Follow the instructions in the [Prettier documentation](https://prettier.io/docs/en/install.html).
@@ -416,11 +418,15 @@ Install and configure Prettier using this command:
 npm install --save-dev --save-exact prettier
 ```
 
+### Create Prettier Config File
+
 Then, create an empty config file to let editors and other tools know you are using Prettier:
 
 ```
 node --eval "fs.writeFileSync('.prettierrc','{}\n')"
 ```
+
+### Create .prettierignore File
 
 Next, create a .prettierignore file to let the Prettier CLI and editors know which files to not format. Here’s an example:
 
@@ -428,7 +434,9 @@ Next, create a .prettierignore file to let the Prettier CLI and editors know whi
 node --eval "fs.writeFileSync('.prettierignore','# Ignore artifacts:\nbuild\ncoverage\n')"
 ```
 
-Install eslint-config-prettier
+### Install eslint-config-prettier
+
+To use Prettier with ESLint, you need to install the eslint-config-prettier package:
 
 ```
 npm i -D eslint-config-prettier
@@ -450,15 +458,8 @@ export default defineConfig([
 ]);
 ```
 
-Configure Prettier in your IDE.
+### Configure Prettier in your IDE
 
 For IntelliJ IDEA, see docs to automatically run Prettier on save.
 https://prettier.io/docs/webstorm
-
-
-Run Prettier on the entire project:
-
-```
-npx prettier --write
-```
 
