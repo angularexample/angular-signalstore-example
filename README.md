@@ -214,7 +214,6 @@ Install Angular Material:
 ng add @angular/material
 ```
 
-
 ## Replace Jasmin with Jest
 
 ### Remove Karma and Jasmine
@@ -313,5 +312,153 @@ In the `scripts` section of the `package.json` file, change the `test` property 
 
 ```
     "test": "jest"
+```
+
+## Install ESLint and Prettier
+
+For consistent code formatting, install and configure ESLint and Prettier.
+
+### The Difference Between ESLint and Prettier
+
+ESLint is a linter. It checks your code for errors and warnings.
+Problems that are not discovered by the linter can cause compile or runtime errors, or unexpected behavior.
+
+Prettier is a code formatter. It reformats your code to make it more consistent and easier to read.
+Format errors normally do not cause compile or runtime errors.
+
+But formatting is a good practice to follow, especially when working with a team.
+If all team members use the same code formatting, it makes it easier to read and understand each other's code.
+
+### Remove .editorconfig
+
+The `.editorconfig` file is added by default by the Angular CLI when you create a new project using `ng new`.
+It is normally used by IDEs to automatically configure the code formatting.
+
+To prevent conflicts or unintended overrides of the lint or formatting rules, remove the `.editorconfig` file.
+
+## Install ESLint
+
+Experts agree that ESLint is the best tool for linting JavaScript code.
+
+For more information, see the [ESLint documentation](https://eslint.org/).
+
+Install and configure ESLint using this command:
+
+```
+npm init @eslint/config@latest
+```
+
+Accept these default settings:
+
+```
+✔ What do you want to lint? · javascript
+✔ How would you like to use ESLint? · problems
+✔ What type of modules does your project use? · esm
+...
+✔ Where does your code run? · browser
+...
+eslint, @eslint/js, globals, typescript-eslint
+✔ Would you like to install them now? · No / Yes
+✔ Which package manager do you want to use? · npm
+```
+
+...Except for the following settings:
+
+```
+Which framework does your project use? …  
+  React
+  Vue.js
+❯ None of these
+
+```
+Select `None of these`
+
+```
+? Does your project use TypeScript? › No / Yes
+```
+Select `Yes`.
+
+```
+ Which language do you want your configuration file be written in? …  
+  JavaScript
+  TypeScript
+```
+Select `TypeScript`.
+
+```
+Jiti is required for Node.js <24.3.0 to read TypeScript configuration files.
+? Would you like to add Jiti as a devDependency? › No / Yes
+```
+Check your version of Node.js. If it is less than 24.3.0, select `Yes`.
+
+### Configure ESLint in Your IDE
+
+For IntelliJ IDEA, see docs to automatically run ESLint on save.
+
+https://www.jetbrains.com/help/idea/eslint.html#ws_js_eslint_automatic_configuration
+
+
+### Install Jiti
+
+Install Jiti with this command:
+
+```
+npm i jiti
+```
+
+## Install Prettier
+
+Follow the instructions in the [Prettier documentation](https://prettier.io/docs/en/install.html).
+
+Install and configure Prettier using this command:
+
+```
+npm install --save-dev --save-exact prettier
+```
+
+Then, create an empty config file to let editors and other tools know you are using Prettier:
+
+```
+node --eval "fs.writeFileSync('.prettierrc','{}\n')"
+```
+
+Next, create a .prettierignore file to let the Prettier CLI and editors know which files to not format. Here’s an example:
+
+```
+node --eval "fs.writeFileSync('.prettierignore','# Ignore artifacts:\nbuild\ncoverage\n')"
+```
+
+Install eslint-config-prettier
+
+```
+npm i -D eslint-config-prettier
+```
+
+Add the following to the `.eslintrc.config.mts` file:
+
+```
+import eslintConfigPrettier from "eslint-config-prettier/flat";
+
+export default defineConfig([
+  { files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+    plugins: { js }, extends: ["js/recommended"],
+    languageOptions: { globals: globals.browser }
+  },
+  { ignores: ["node_modules/", "dist/", "*.min.js", ".idea", ".vscode", "coverage/", "jest.config.js"]},
+  eslintConfigPrettier,
+  tseslint.configs.recommended,
+]);
+```
+
+Configure Prettier in your IDE.
+
+For IntelliJ IDEA, see docs to automatically run Prettier on save.
+https://prettier.io/docs/webstorm
+
+
+Run Prettier on the entire project:
+
+```
+npx prettier --write
 ```
 
