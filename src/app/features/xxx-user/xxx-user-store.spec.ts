@@ -17,10 +17,11 @@ class XxxDummyComponent {
 }
 
 describe('XxxUserStore', () => {
+  type XxxUserStore = InstanceType<typeof XxxUserStore>;
   const mockUserId = 1;
   let router: Router;
   let spyRouterNavigate: jest.SpyInstance;
-  let store: any;
+  let store: XxxUserStore;
 
   const mockRoutes: Route[] = [
     {
