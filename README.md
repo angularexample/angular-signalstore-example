@@ -405,3 +405,60 @@ Install Jiti with this command:
 ```
 npm i jiti
 ```
+
+## Install Prettier
+
+Follow the instructions in the [Prettier documentation](https://prettier.io/docs/en/install.html).
+
+Install and configure Prettier using this command:
+
+```
+npm install --save-dev --save-exact prettier
+```
+
+Then, create an empty config file to let editors and other tools know you are using Prettier:
+
+```
+node --eval "fs.writeFileSync('.prettierrc','{}\n')"
+```
+
+Next, create a .prettierignore file to let the Prettier CLI and editors know which files to not format. Here’s an example:
+
+```
+node --eval "fs.writeFileSync('.prettierignore','# Ignore artifacts:\nbuild\ncoverage\n')"
+```
+
+Install eslint-config-prettier
+
+```
+npm i -D eslint-config-prettier
+```
+
+Add the following to the `.eslintrc.config.mts` file:
+
+```
+import eslintConfigPrettier from "eslint-config-prettier/flat";
+
+export default defineConfig([
+  { files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+    plugins: { js }, extends: ["js/recommended"],
+    languageOptions: { globals: globals.browser }
+  },
+  { ignores: ["node_modules/", "dist/", "*.min.js", ".idea", ".vscode", "coverage/", "jest.config.js"]},
+  eslintConfigPrettier,
+  tseslint.configs.recommended,
+]);
+```
+
+Configure Prettier in your IDE.
+
+For IntelliJ IDEA, see docs to automatically run Prettier on save.
+https://prettier.io/docs/webstorm
+
+
+Run Prettier on the entire project:
+
+```
+npx prettier --write
+```
+
