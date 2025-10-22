@@ -1,3 +1,5 @@
+import { mockUsers } from "./xxx-user.mocks";
+import { signal } from "@angular/core";
 import { TestBed } from '@angular/core/testing';
 import { XxxUserFacade } from './xxx-user-facade';
 import { XxxUserStore } from './xxx-user-store';
@@ -5,13 +7,13 @@ import { XxxUserStore } from './xxx-user-store';
 describe('XxxUserFacade', () => {
   const mockUserId=1;
   const mockXxxUserStore = {
-    isUsersEmpty: jest.fn(),
-    isUsersLoaded: jest.fn(),
-    isUsersLoading: jest.fn(),
-    selectedUserId: jest.fn(),
+    isUsersEmpty: signal(false),
+    isUsersLoaded: signal(false),
+    isUsersLoading: signal(false),
+    selectedUserId: signal(mockUserId),
     setSelectedUserId: jest.fn(),
     showUsers: jest.fn(),
-    users: jest.fn(),
+    users: signal(mockUsers)
   };
 
   TestBed.configureTestingModule({
@@ -22,6 +24,7 @@ describe('XxxUserFacade', () => {
   });
 
   const service: XxxUserFacade = TestBed.inject(XxxUserFacade);
+
   describe('constructor phase', () => {
     it('should be created', () => {
       expect(service).toBeDefined();
