@@ -1,4 +1,4 @@
-import { Component, Signal } from '@angular/core';
+import { Component, signal, Signal } from '@angular/core';
 import { mockPost, mockPost1, mockPost2, mockPosts } from './xxx-post.mocks';
 import { of, throwError } from 'rxjs';
 import { provideHttpClient } from '@angular/common/http';
@@ -49,7 +49,7 @@ describe('XxxPostStore', () => {
   }
 
   const mockXxxUserFacade = {
-    selectedUserId: jest.fn(),
+    selectedUserId: signal(userId),
   }
 
   beforeEach(() => {
@@ -69,7 +69,6 @@ describe('XxxPostStore', () => {
     spyRouterNavigate = jest.spyOn(router, 'navigateByUrl');
     mockXxxPostData.getPosts.mockReturnValue(of(mockPosts));
     mockXxxPostData.updatePost.mockReturnValue(of(mockPost));
-    mockXxxUserFacade.selectedUserId.mockReturnValue(userId);
   });
 
   afterEach(() => {
@@ -322,7 +321,7 @@ describe('XxxPostStore', () => {
       store.setPostForm(mockPost);
       store.setSelectedUserId(userId);
       const result: Signal<XxxPostType | undefined> | undefined = store.postForm;
-      if(result){
+      if (result) {
         expect(result()).toBe(undefined);
       }
     });
@@ -375,7 +374,7 @@ describe('XxxPostStore', () => {
     it('should call setSelectedUserId when userId is not the same from user ', () => {
       store.setSelectedUserId(0);
       store.showPosts();
-      const result: Signal<number | undefined> | undefined  = store.selectedUserId;
+      const result: Signal<number | undefined> | undefined = store.selectedUserId;
       if (result) {
         expect(result()).toBe(mockPost.userId);
       }
